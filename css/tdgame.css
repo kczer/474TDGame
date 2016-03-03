@@ -1,3 +1,8 @@
 .hidden {
     display: none;
 }
+#tower {
+    background-image: url("http://cliparts.co/cliparts/kc8/nGy/kc8nGyocr.png");
+    width:800px;
+    height:800px;
+}
