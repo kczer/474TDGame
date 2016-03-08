@@ -1,7 +1,24 @@
-$hand = $('#tower');
+var testTower = $('#tower');
+var towerChosen = false;
 
-var changeCursor = function(){
-    $hand.css('cursor','url(http://cliparts.co/cliparts/kc8/nGy/kc8nGyocr.png)');
+var turnCursorOn = function(e){
+    $("body").toggleClass("cursor_change");
+    testTower.off("click", turnCursorOn);
+    $("body").on("click", turnCursorOff);
+    towerChosen = true;
+    e.stopImmediatePropagation();
 }
 
-$hand.click(changeCursor());
+var turnCursorOff = function(){
+    if(towerChosen = true){
+    $("body").toggleClass("cursor_change");
+    $("body").off("click", turnCursorOff);
+    testTower.on("click", turnCursorOn);
+    towerChosen = false;
+    }
+}
+
+testTower.on("click", turnCursorOn);
+
+
+    

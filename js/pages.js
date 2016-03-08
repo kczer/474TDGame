@@ -1,4 +1,4 @@
-var pages = ['welcome','home', 'instruction','play' ];
+var pages = ['welcome','home', 'instruction','play'];
 
 
 var currentPageIndex = 0;
@@ -30,7 +30,8 @@ var showPlayGame = function(){
   var oldIndex = currentPageIndex;
     currentPageIndex = 3;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
-    document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
+    document.getElementById("tower").classList.remove('hidden');
+    //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
 
 var display_Welcome_Screen = function(){

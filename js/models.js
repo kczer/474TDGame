@@ -60,7 +60,7 @@ function Game(level, wave){
   this.Enemies = this.initEnemies(level,wave);
 };
 
-Game.prototype.initEnemies() = function(level, wave){
+Game.prototype.initEnemies = function(level, wave){
   var enemies = [];
   
   enemies.push(anenem);
@@ -91,6 +91,7 @@ function Base(){
     // this.location
 }
 
-Base.prototype.updateHealth(enemDamage){
+Base.prototype.updateHealth = function(enemDamage){
     this.health -= enemDamage;  
 };
+
