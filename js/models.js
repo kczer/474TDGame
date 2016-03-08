@@ -1,10 +1,11 @@
 // THIS FILE DEALS WITH THE CLASSES FOR THE GAME OBJECTS
 // THIS AREA ADDRESSES THE TOWER
-function Tower(name, fireRate, damage, cost){
+function Tower(name, fireRate, damage, range, cost){
     this.name = name;
     this.fireRate = fireRate;
     this.damage = damage;
     this.cost = cost;
+    this.range = range;
 };
 
 Tower.prototype.upgrade = function(cost, fireRate, damage){
@@ -18,10 +19,11 @@ Tower.prototype.sell = function(){
 };
 
 // THIS AREA ADDRESSES THE ENEMY(FBI)
-function Enemy(type, health, armor){
+function Enemy(type, health, armor, speed){
     this.type = type;
     this.health = health;
     this.armor = armor;
+    this.speed = speed;
 };
     
 Enemy.prototype.damage = function(damage){
@@ -60,4 +62,16 @@ Game.prototype.damageBase = function(){
   return this.health <= 0;
 };
 
+Game.prototype.tick = function(){
+  this.moveEnemies();
+  this.fireTowers();
+}
+
+Game.prototype.moveEnemies = function(){
+  //TODO when map is solidified
+}
+
+Game.prototype.shootTowers = function(){
+  //TODO when map is solidified
+}
 
