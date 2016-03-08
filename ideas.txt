@@ -1,0 +1,95 @@
+Chris Czewinski
+Briana Slater - pretty stuff
+Ryan Serva
+David Law
+Niko (dunno if you put govt. name) Gerassimakis
+
+Tower Ideas
+    iPod Thrower
+        Basic Tower, low attack, high attack rate
+        Flavor text: “Uses a lifeproof case, hopefully his screen won’t break”
+    iPad Thrower
+        Higher damage, low attack rate
+    Android Thrower
+        Customizable
+    iCannon
+        Splash, high damage
+        Flavor Text: “Uses only the highest quality cannonballs that are made in China by child laborers with virtually no rights. Morale -10”
+    Golden iCannon
+        Same exact thing as iCannon, but is 3x more expensive
+Snowden
+    Slows all agents in vicinity
+    Flavor Text: “Distracts the FBI from their actual job”
+Offshore Tax Shelter
+    Your cash increases by 5% per round
+
+Attacker Ideas
+    Agent
+        Basic attacker
+    Swat 
+        Armored attacker
+    Helicopter
+        Flying, ignores normal path
+        Or follows the normal path, but at a faster pace
+    Hacker
+        Turns off some of your towers
+Boss Ideas
+    Current Director of the FBI, James Comey
+    Final Boss: J. Edgar Hoover
+    Various people that support the FBI/Government
+    Donald Trump
+    Government Lawyers
+
+Timing aspect for each “area”
+    Certain enemies will appear in certain areas/levels
+    After a period of time, new enemies stop generating
+
+Similar to Hordes of Orcs???
+    Player has an “open area” to defend and can place defenses anywhere and create the path for the enemy to take
+    Player has a path to defend and puts up defenses up to slow/damage/kill the enemy
+
+
+
+Game Classes
+    Game
+        Level
+        Score
+        “Game Credits” - Based on level, start value
+            Used to purchase towers and upgrade them
+        Enemies Left
+
+Enemies
+        Name
+        Location
+        Damage Value
+        Health
+        Movement Speed
+
+Tower
+        Name
+        Location
+        Damage
+        Destroy Value
+        Upgrade Value
+
+    “Bullets”/Code
+        Damage to attacker
+Location
+        
+Apple Corporate Office
+Health
+Location
+    Path
+        Predefined Vs Player defined
+If Open Area, then grid of possible item placement
+Grid squad, enemy moves toward a grid location, if collision update and set the correct movement
+If Predefined Path, then create the path
+Everywhere else, a tower can be placed, except on the edges of the game border    
+    
+
+Resource I used as basis for the game
+http://www.gahe.com/Orcs-Vs-Humans
+
+
+
+    

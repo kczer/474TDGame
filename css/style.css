@@ -1,0 +1,39 @@
+#bg{
+    height: 70vh;
+    width: 70vw;
+    background-color: aquamarine;
+}
+
+#frank{
+    height:150px;
+    width:150px;
+}
+
+#tower{
+    height:150px;
+    width:150px;    
+}
+
+.left{
+    height:160px;
+    width:160px;
+    background-image: url('img/leftwalk.gif');
+}
+
+.up{
+    height:160px;
+    width:160px;
+    background-image: url('img/backwalk.gif');
+}
+
+.right{
+    height:160px;
+    width:160px;
+    background-image: url('img/rightwalk.gif');
+}
+.down{
+    height:160px;
+    width:160px;
+    background-image: url('img/frontwalk.gif');
+}
+
