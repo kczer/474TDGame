@@ -17,7 +17,7 @@ $(document).ready(function(){
             $atower= $(document.createElement('div')).attr('id', 'tower');
             $atower.css("left", this.posx+"px");
             $atower.css("top ", this.posy+"px");
-            $atower.css("background-image", "url('img/tower/sprite_1.png')");
+            $atower.css("background-image", "url('/img/tower/sprite_1.png')");
             
             $('#bg').append($atower);
     
@@ -27,7 +27,7 @@ $(document).ready(function(){
         this.moveTower = function(){
             var i=1;
             if(i<=8){
-               $atower.css("background-image", "url('img/tower/sprite_'"+i+".png)");
+               $atower.css("background-image", "url('/img/tower/sprite_'"+i+".png)");
                console.log("hi");
                i++;
                setTimeout(function(){self.moveTower()},100);

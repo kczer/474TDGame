@@ -15,7 +15,7 @@ $(document).ready(function(){
             $afrank = $(document.createElement('div')).attr('id', 'frank');
             $afrank.css("left", this.posx+"px");
             $afrank.css("top ", this.posy+"px");
-            $afrank.css("background-image", "url('img/frontwalk.gif')");
+            $afrank.css("background-image", "url('/img/frontwalk.gif')");
             
             $('#bg').append($afrank);
     
@@ -54,26 +54,26 @@ $(document).ready(function(){
         
         this.moveLeft = function(){
             self.posx = self.posx-1;
-            $afrank.css("background-image", "url('img/leftwalk.gif')");
+            $afrank.css("background-image", "url('/img/leftwalk.gif')");
             console.log("posx: "+self.posx);
         }
         
         this.moveUp = function(){
             self.posx = self.posy-1;
-            $afrank.css("background-image", "url('img/backwalk.gif')");
+            $afrank.css("background-image", "url('/img/backwalk.gif')");
             console.log("posy: "+self.posy);   
         }
         
         this.moveRight = function(){
             self.posx = self.posx+1;
            // $afrank.css('right',self.posx+1+"px");
-            $afrank.css("background-image", "url('img/rightwalk.gif')");
+            $afrank.css("background-image", "url('/img/rightwalk.gif')");
             console.log("posx: "+self.posx);   
         }
         
         this.moveDown = function(){
             self.posx = self.posy+1;
-            $afrank.css("background-image", "url('img/frontwalk.gif')");
+            $afrank.css("background-image", "url('/img/frontwalk.gif')");
             console.log("posy: "+self.posy);   
         }
     
