@@ -13,11 +13,16 @@ $(document).ready(function(){
         
         this.drawFrank = function(){
             $afrank = $(document.createElement('div')).attr('id', 'frank');
-            $afrank.css("left", this.posx+"px");
-            $afrank.css("top ", this.posy+"px");
-            $afrank.css("background-image", "url('img/frontwalk.gif')");
+            $afrank.css("height", "150px");
+            $afrank.css("width", "150px");
+            $afrank.css("position", "absolute");
+            $afrank.css("left", self.posx+"px");
+            $afrank.css("top ", self.posy+"px");
+
+            $afrank.css("background-image", "url('/img/frontwalk.gif')");
             
             $('#bg').append($afrank);
+            console.log("i am append");
     
         }
         
@@ -53,27 +58,33 @@ $(document).ready(function(){
         }
         
         this.moveLeft = function(){
-            self.posx = self.posx-1;
-            $afrank.css("background-image", "url('img/leftwalk.gif')");
+
+            self.posx-=1;
+
+            $afrank.css("background-image", "url('/img/leftwalk.gif')");
             console.log("posx: "+self.posx);
         }
         
         this.moveUp = function(){
-            self.posx = self.posy-1;
-            $afrank.css("background-image", "url('img/backwalk.gif')");
+
+            self.posy-=1;
+
+            $afrank.css("background-image", "url('/img/backwalk.gif')");
             console.log("posy: "+self.posy);   
         }
         
         this.moveRight = function(){
-            self.posx = self.posx+1;
-           // $afrank.css('right',self.posx+1+"px");
-            $afrank.css("background-image", "url('img/rightwalk.gif')");
+            self.posx+=1;
+
+            $afrank.css("background-image", "url('/img/rightwalk.gif')");
             console.log("posx: "+self.posx);   
         }
         
         this.moveDown = function(){
-            self.posx = self.posy+1;
-            $afrank.css("background-image", "url('img/frontwalk.gif')");
+
+            self.posy+=1;
+
+            $afrank.css("background-image", "url('/img/frontwalk.gif')");
             console.log("posy: "+self.posy);   
         }
     
@@ -82,7 +93,7 @@ $(document).ready(function(){
     
     
 //execute
-var frank1 = new Frank(50,50);   
+var frank1 = new Frank(200,100);   
     frank1.drawFrank();
     frank1.moveFrank(); 
 
