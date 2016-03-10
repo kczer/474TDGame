@@ -37,3 +37,14 @@
     background-image: url('img/frontwalk.gif');
 }
 
+
+.levelInfo{
+    width:150px;
+    display:inline-block;
+}
+
+.creditPlace{
+    width:150px;
+    display:inline-block;
+}
+
