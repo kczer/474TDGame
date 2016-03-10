@@ -18,6 +18,7 @@ $(document).ready(function(){
             $afrank.css("position", "absolute");
             $afrank.css("left", self.posx+"px");
             $afrank.css("top ", self.posy+"px");
+
             $afrank.css("background-image", "url('/img/frontwalk.gif')");
             
             $('#bg').append($afrank);
@@ -57,25 +58,32 @@ $(document).ready(function(){
         }
         
         this.moveLeft = function(){
+
             self.posx-=1;
+
             $afrank.css("background-image", "url('/img/leftwalk.gif')");
             console.log("posx: "+self.posx);
         }
         
         this.moveUp = function(){
+
             self.posy-=1;
+
             $afrank.css("background-image", "url('/img/backwalk.gif')");
             console.log("posy: "+self.posy);   
         }
         
         this.moveRight = function(){
             self.posx+=1;
+
             $afrank.css("background-image", "url('/img/rightwalk.gif')");
             console.log("posx: "+self.posx);   
         }
         
         this.moveDown = function(){
+
             self.posy+=1;
+
             $afrank.css("background-image", "url('/img/frontwalk.gif')");
             console.log("posy: "+self.posy);   
         }

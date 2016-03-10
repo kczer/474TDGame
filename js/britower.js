@@ -28,12 +28,14 @@ $(document).ready(function(){
         
         this.moveTower = function(){
             if(i<=8){
+
                var img = "url('/img/tower/sprite_'"+i+"'.png')";
                $atower.css("background-image", img);
                console.log($atower.css("background-image"));
                console.log("hi"+i);
                ++i;
                setTimeout(self.moveTower(),100);
+
                
            }
            else{
