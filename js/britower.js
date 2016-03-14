@@ -26,24 +26,23 @@ $(document).ready(function(){
         }
         
         
-        this.moveTower = function(){
-            if(i<=8){
+        // this.moveTower = function(){
+        //     if(i<=8){
 
-               var img = "url('/img/tower/sprite_'"+i+"'.png')";
-               $atower.css("background-image", img);
-               console.log($atower.css("background-image"));
-               console.log("hi"+i);
-               ++i;
-               setTimeout(self.moveTower(),100);
+        //       var img = i+"'.png'";
+        //       $atower.css("background-image", "url('/img/tower/sprite_'"+img+"')'");
+        //       console.log($atower.css("background-image"));
+        //       console.log("hi"+i);
+        //       ++i;
+        //       setTimeout(self.moveTower(),100);
 
-               
-           }
-           else{
-               console.log("bye");
-               return 0;
-           }
+        //   }
+        //   else{
+        //       console.log("bye");
+        //       return 0;
+        //   }
              
-        }
+        // }
         
            
     }
@@ -52,7 +51,7 @@ $(document).ready(function(){
 //execute
 var Tower1 = new Tower("aye", 0, 3);   
     Tower1.drawTower();
-    Tower1.moveTower(); 
+//    Tower1.moveTower(); 
 
     
 //update
