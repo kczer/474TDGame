@@ -20,6 +20,8 @@ var showMainMenu = function(){
     currentPageIndex = 0;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
+  hideGrid();
+  document.getElementById("tower").classList.add('hidden');
   display_Welcome_Screen();
 };
 
@@ -35,12 +37,11 @@ var showPlayGame = function(){
     currentPageIndex = 2;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
+    document.getElementById("tower").classList.remove('hidden');
+    showGrid();
     display_Credits();
     display_Wave();
-    
-    // document.getElementById("tower").classList.remove('hidden');
-    //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
-};
+    };
 
 var pauseGame = function(){
   // This function pauses the game elements and clears the screen and include the Text Pause
@@ -51,8 +52,8 @@ var pauseGame = function(){
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     // display_Credits();
     // display_LevelWave();
-    
-    // document.getElementById("tower").classList.remove('hidden');
+    hideGrid();
+    document.getElementById("tower").classList.add('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
 
@@ -105,7 +106,26 @@ var display_Towers = function(){
   
 };
 
-
+var hideGrid = function(){
+  for(var j = 0; j < 5; j++)
+	  {
+	   	for(var i = 0; i < 5; i++)
+		  {
+		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+		    document.getElementById(pos).classList.add('hidden');
+		  }
+	  }
+}
+var showGrid = function(){
+  for(var j = 0; j < 5; j++)
+	  {
+	   	for(var i = 0; i < 5; i++)
+		  {
+		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+		    document.getElementById(pos).classList.remove('hidden');
+		  }
+	  }
+}
 var appStart = function(){
     currentPageIndex = 0;
     display_Welcome_Screen();

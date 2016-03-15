@@ -13,22 +13,17 @@ var towerPlaceLogic = function(){
 	if(gameGrid.grid[clickedTile].hasTower == false){
 		gameGrid.grid[clickedTile].hasTower = true;
 		gameGrid.grid[clickedTile].towerType = lastClickedTile;
-		var paintTower = document.createElement("div");
-		paintTower.style.width = "30px";
-		paintTower.style.height = "30px";
-		paintTower.style.backgroundImage = "url('http://www.placecage.com/30/30')";
-		paintTower.style.left = clickedPositon.left + (TILE_W / 4);
-		console.log(paintTower.style.left);
-		paintTower.style.top = clickedPositon.top + (TILE_H / 4);
-		console.log(paintTower.style.top);
-		paintTower.style.position = "absolute";
-		document.body.appendChild(paintTower);
+		tile.style.backgroundImage = "url('http://www.placecage.com/30/30')";
+		tile.style.backgroundRepeat = "no-repeat";
+		tile.style.backgroundPosition = "center";
 	}
 	else
 	alert("Sorry there is a tower there");
 }
 
 var Grid = function(mapHeight,mapWidth) {
+    var mapHeight = mapHeight;
+    var mapWidth = mapWidth;
     this.grid = {};
     // create the map zone
 	
@@ -42,13 +37,13 @@ var Grid = function(mapHeight,mapWidth) {
             var pathTile = {nextDirection: null, hasEnemy: null};
             var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
 			mapzone.setAttribute("id",pos);
-			mapzone.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 			mapzone.style.left = (TILE_H*i+200) + "px";
-			mapzone.style.top = (TILE_W*j) + "px";
+			mapzone.style.top = (TILE_W*j+200) + "px";
 			document.body.appendChild(mapzone);
 			if(levelOne.indexOf(pos) > -1)
 			{
-				mapzone.style.backgroundColor = "blue";
+				mapzone.style.backgroundColor = "brown";
 				this.grid[pos] = pathTile;
 			}
 			else
