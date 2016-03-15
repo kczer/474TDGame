@@ -14,16 +14,25 @@ $(document).ready(function(){
         
         this.drawFrank = function(){
             $afrank = $(document.createElement('div')).attr('id', 'frank');
-            $afrank.css("height", "150px");
-            $afrank.css("width", "150px");
+
             $afrank.css("position", "absolute");
             $afrank.css("left", self.posx+"px");
             $afrank.css("top ", self.posy+"px");
-
-            $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
             
-            $('#bg').append($afrank);
-            console.log("i am append");
+            if (self.type == "basic"){
+                $afrank.css("height", "60px");
+                $afrank.css("width", "60px");
+                $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
+                $('#bg').append($afrank);
+                console.log("i am append");
+            
+            }else{
+                $afrank.css("height", "60px");
+                $afrank.css("width", "60px");
+                $afrank.css("background-image", "url('/img/foe2/frontwalk.gif')");
+                $('#bg').append($afrank);
+                console.log("aye");
+            }
     
         }
         
@@ -59,34 +68,49 @@ $(document).ready(function(){
         }
         
         this.moveLeft = function(){
-
+            
             self.posx-=1;
-
-            $afrank.css("background-image", "url('/img/foe/leftwalk.gif')");
             console.log("posx: "+self.posx);
+            if(self.type == "basic"){
+                $afrank.css("background-image", "url('/img/foe/leftwalk.gif')");
+            }else{
+                $afrank.css("background-image", "url('/img/foe2/leftwalk.gif')");   
+            }
+           
         }
         
         this.moveUp = function(){
 
             self.posy-=1;
-
-            $afrank.css("background-image", "url('/img/foe/backwalk.gif')");
             console.log("posy: "+self.posy);   
+            if(self.type == "basic"){
+                $afrank.css("background-image", "url('/img/foe/backwalk.gif')");
+            }else{
+                $afrank.css("background-image", "url('/img/foe2/backwalk.gif')");   
+            }
         }
         
         this.moveRight = function(){
             self.posx+=1;
 
-            $afrank.css("background-image", "url('/img/foe/rightwalk.gif')");
-            console.log("posx: "+self.posx);   
+            console.log("posx: "+self.posx); 
+            if(self.type == "basic"){
+                $afrank.css("background-image", "url('/img/foe/rightwalk.gif')");
+            }else{
+                $afrank.css("background-image", "url('/img/foe2/rightwalk.gif')");   
+            }
         }
         
         this.moveDown = function(){
 
             self.posy+=1;
-
-            $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
-            console.log("posy: "+self.posy);   
+  
+            console.log("posy: "+self.posy); 
+            if(self.type == "basic"){
+                $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
+            }else{
+                $afrank.css("background-image", "url('/img/foe2/frontwalk.gif')");   
+            }
         }
     
         
@@ -97,6 +121,9 @@ $(document).ready(function(){
 var frank1 = new Frank("basic", 200,100);   
     frank1.drawFrank();
     frank1.moveFrank(); 
-
+    
+var frank2 = new Frank("advanced", 300, 200);
+    frank2.drawFrank();
+    frank2.moveFrank(); 
 
 });
