@@ -60,7 +60,6 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 }
-
 var gameGrid = new Grid(5,5);
 gameGrid.createGrid();
 console.log(gameGrid.grid["(0,4)"]);

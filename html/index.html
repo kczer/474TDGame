@@ -12,11 +12,12 @@
 
 <body>
 
-    <div id="welcome">
-        <button id="mainMenu" type="button">Main Menu</button>
-    </div>
+    <!--<div id="welcome">-->
+    <!--    <button id="mainMenu" type="button">Main Menu</button>-->
+    <!--</div>-->
     
-    <div id="home" class= "hidden">
+    <div id="home">
+        <div id= "titleScreen"></div>
         <button id="playButton" type="button">Play</button>
         <button id="instruct" type="button">Instructions</button>
     </div>
@@ -26,17 +27,17 @@
         <button id="insMainMenu" type="button">Main Menu</button>
     </div>
     
-    <div id="gameObjects" class = "hidden">
-        <div id="topBar">
+    <div id="gameObjects" class = "hidden" >
+        <div id="topBar" class = "bar">
             <div id="creditDisplay" class = "creditPlace"></div>
             <div id="levelWaveDisplay" class = "levelInfo"></div>
         </div>
-        <div id ="game">
+        <div id ="game" class= "gameScreen">
             
         </div>
-        <div id="bottomBar">
-            <div id="towerSelection"></div>
-            <div id = "mainReturn">
+        <div id="bottomBar" class = "bar">
+            <div id="towerSelection" class = "creditPlace"></div>
+            <div id = "mainReturn" class = "levelInfo">
                 <button id="pause" type="button">Pause</button>
                 <button id="quit" type="button">Quit</button>
                 
@@ -50,12 +51,12 @@
             <button id="pauseQuit" type="button">Quit</button>
         </div>
         
-    <div id="tower" class ="">
+    <div id="tower" class ="hidden">
         
     </div>
     
 
-    <div id="bg" >
+    <div id="bg" class = "hidden">
         
     </div>
     
