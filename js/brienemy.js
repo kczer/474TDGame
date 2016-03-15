@@ -2,8 +2,9 @@ var $afrank;
  
 $(document).ready(function(){
 
-    var Frank = function(posx, posy){
+    var Frank = function(type, posx, posy){
        // Enemy.call(type, health, damage);
+       this.type = type;
         this.posx = posx;
         this.posy = posy;
         //this.dir = dir;
@@ -19,7 +20,7 @@ $(document).ready(function(){
             $afrank.css("left", self.posx+"px");
             $afrank.css("top ", self.posy+"px");
 
-            $afrank.css("background-image", "url('/img/frontwalk.gif')");
+            $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
             
             $('#bg').append($afrank);
             console.log("i am append");
@@ -61,7 +62,7 @@ $(document).ready(function(){
 
             self.posx-=1;
 
-            $afrank.css("background-image", "url('/img/leftwalk.gif')");
+            $afrank.css("background-image", "url('/img/foe/leftwalk.gif')");
             console.log("posx: "+self.posx);
         }
         
@@ -69,14 +70,14 @@ $(document).ready(function(){
 
             self.posy-=1;
 
-            $afrank.css("background-image", "url('/img/backwalk.gif')");
+            $afrank.css("background-image", "url('/img/foe/backwalk.gif')");
             console.log("posy: "+self.posy);   
         }
         
         this.moveRight = function(){
             self.posx+=1;
 
-            $afrank.css("background-image", "url('/img/rightwalk.gif')");
+            $afrank.css("background-image", "url('/img/foe/rightwalk.gif')");
             console.log("posx: "+self.posx);   
         }
         
@@ -84,7 +85,7 @@ $(document).ready(function(){
 
             self.posy+=1;
 
-            $afrank.css("background-image", "url('/img/frontwalk.gif')");
+            $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
             console.log("posy: "+self.posy);   
         }
     
@@ -93,7 +94,7 @@ $(document).ready(function(){
     
     
 //execute
-var frank1 = new Frank(200,100);   
+var frank1 = new Frank("basic", 200,100);   
     frank1.drawFrank();
     frank1.moveFrank(); 
 
