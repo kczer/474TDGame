@@ -35,5 +35,5 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 }
-var gameGrid = new Grid(5,5);
-gameGrid.createGrid();
+// var gameGrid = new Grid(5,5);
+// gameGrid.createGrid();
