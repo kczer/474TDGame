@@ -1,53 +1,39 @@
-var TILE_H = 15;
-var TILE_W = 15;
-var MAP_H = 30;
-var MAP_W = 80;
- 
+var TILE_H = 60;
+var TILE_W = 60;
 
-var drawMap = function()
-{
-	// create the map zone
-	for(var j = 0; j < MAP_H; j++)
+var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
+
+var Grid = function(mapHeight,mapWidth) {
+    this.grid = {};
+    // create the map zone
+	
+    this.createGrid = function() {
+	for(var j = 0; j < mapHeight; j++)
 	{
-		for(var i = 0; i < MAP_W; i++)
+		for(var i = 0; i < mapWidth; i++)
 		{
 			var mapzone = document.createElement("div");
-			mapzone.setAttribute("id","mapzone"+i);
-			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
-			mapzone.style.left = TILE_H*i + "px";
-			mapzone.style.top = TILE_W*j + "px";
-			if(level1(i,j))
+			var nonPathTile={locationY: i, locationX: j, hasTower: false,  towerType: null}; //create a new key/dictionary value for each cell/tile in our table into our grid obj, which will keep track of what exists in each cell
+            var pathTile = {nextDirection: null, hasEnemy: null};
+            var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+			mapzone.setAttribute("id",pos);
+			mapzone.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+			mapzone.style.left = (TILE_H*i) + "px";
+			mapzone.style.top = (TILE_W*j) + "px";
+			if(levelOne.indexOf(pos) > -1)
 			{
-				mapzone.style.backgroundColor = "#1E90FF";
+				mapzone.style.backgroundColor = "blue";
+				this.grid[pos] = pathTile;
 			}
 			else
 			{
-				// if it isn't part of the map, its a drop target for a turret
+				console.log(levelOne[pos]);
+				this.grid[pos] = nonPathTile;				
 			}
 			document.body.appendChild(mapzone);
 		}
 	}
 }
-
-var level1 = function(i,j)
-{
-	if(	(i == 0 && (j >= 0 && j <= 2))
-		|| (j == 2 && (i >=0 && i < 70))
-		|| (i == 70 && (j >=2 && j <= 28))
-		|| (j == 28 && (i <= 70 && i >= 60))
-		|| (i == 60 && (j <= 28 && j >= 5))
-		|| (j == 5 && (i <= 60 && i >= 40))
-		|| (i == 40 && (j >= 5 && j <= 25))
-		|| (j == 25 && (i <= 40 && i >= 30))
-		|| (i == 30 && (j >= 20 && j <= 25))
-		|| (j == 20 && (i <= 30 && i >= 5))
-		|| (i == 5 && (j <= 20 && j >= 10))
-		|| (j == 10 && (i >= 5 && i <= 80))
-		)
-	{
-		return true;
-	}
-	return false;
 }
-
-drawMap();
+var gameGrid = new Grid(5,5);
+gameGrid.createGrid();
