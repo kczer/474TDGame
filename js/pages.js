@@ -35,7 +35,7 @@ var showPlayGame = function(){
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     display_Credits();
-    display_LevelWave();
+    display_Wave();
     
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
@@ -82,18 +82,18 @@ var display_Credits = function(){
   $div.appendChild($p);
 };
 
-var display_LevelWave = function(){
+var display_Wave = function(){
   var $div = document.getElementById("levelWaveDisplay");
   $div.innerHTML = '';
-  var $p = document.createElement('p');
-  var levelText = "Level: " + level;
-  $p.innerHTML = levelText;
+  // var $p = document.createElement('p');
+  // var levelText = "Level: " + level;
+  // $p.innerHTML = levelText;
   
   var $p1 = document.createElement('p');
   var waveText = "Wave: " + wave + "/" + waveMax;
   $p1.innerHTML = waveText;
   
-  $div.appendChild($p);
+  // $div.appendChild($p);
   $div.appendChild($p1);
 };
 
