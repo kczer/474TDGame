@@ -2,9 +2,17 @@ var pages = ['home', 'instruction','gameObjects', 'paused'];
 // 'welcome',
 var credits = 100;
 var level = 1;
-var wave = 1;
+var wave = 15;
 var waveMax = 15;
 var currentPageIndex = 0;
+
+var normalTower = ["normal", 100];
+var fastTower = ["fast", 70];
+var slowTower = ["slow", 50];
+var damageTower = ["damage", 150];
+
+var Towers = [normalTower, fastTower,slowTower,damageTower];
+
 
 // var showWelcome = function(){
 //   var oldIndex = currentPageIndex;
@@ -37,7 +45,8 @@ var showPlayGame = function(){
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     display_Credits();
     display_Wave();
-    
+    display_last_Wave();
+    display_Towers();
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -83,6 +92,18 @@ var display_Credits = function(){
   $div.appendChild($p);
 };
 
+
+var display_last_Wave = function(){
+var $div = document.getElementById("lastWaveDisplay");
+$div.innerHTML = '';
+if(wave == waveMax){
+  var $p = document.createElement('p');
+  var text = "Final Wave";
+  $p.innerHTML = text;
+  $div.appendChild($p);
+}
+};
+
 var display_Wave = function(){
   var $div = document.getElementById("levelWaveDisplay");
   $div.innerHTML = '';
@@ -99,9 +120,21 @@ var display_Wave = function(){
 };
 
 var display_Towers = function(){
-  var $div = document.getElementById("levelWaveDisplay");
+  var $div = document.getElementById("towerSelection");
   $div.innerHTML = '';
-  
+  Towers.forEach(function(aTower){
+    var $TowerCont = document.createElement('div');
+    var $TowerDiv = document.createElement('div');
+    $TowerDiv.innerHTML = aTower[0];
+    $TowerDiv.classList.add('towerPlace');
+    var $TowerCost = document.createElement('div');
+    $TowerCost.innerHTML = aTower[1];
+    $TowerCost.classList.add('towerPlace');
+    $TowerCont.classList.add('towerPlace');
+    $TowerCont.appendChild($TowerDiv);
+    $TowerCont.appendChild($TowerCost);
+    $div.appendChild($TowerCont);
+  })
   
 };
 

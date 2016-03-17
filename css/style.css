@@ -11,6 +11,18 @@
     width:150px;    
 }
 
+body{
+        background-color:black;
+        }
+    
+p{
+        color:white;
+    }
+
+div{
+    color:white;
+}
+
 .left{
     height:160px;
     width:160px;
@@ -38,17 +50,34 @@
 .levelInfo{
     float:right;
     width:150px;
-    display:inline;
+    display:inline-block;
 }
 
 .creditPlace{
     float:left;
     width:150px;
-    display:inline;
+    display:inline-block;
 }
+
+.wavePlace{
+    width:300px;
+    height:50px;
+    float:center;
+    display:inline-block;
+}
+.towerDisplay{
+    width:500px;
+}
+.towerPlace{
+    width:100px;
+    height:100px;
+    display:inline-block;
+}
+
 
 .bar{
     width:700px;
+    height:50px;
     display:inline-block;
 }
 
