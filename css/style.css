@@ -4,8 +4,6 @@
     background-color: aquamarine;
 }
 
-
-
 #tower{
     height:150px;
     width:150px;    
@@ -23,30 +21,184 @@ div{
     color:white;
 }
 
+/* foe */
+
 .left{
     height:160px;
     width:160px;
-    background-image: url('img/leftwalk.gif');
+    background-image: url('/img/foe/leftwalk.gif');
 }
 
 .up{
     height:160px;
     width:160px;
-    background-image: url('img/backwalk.gif');
+    background-image: url('/img/foe/backwalk.gif');
 }
 
 .right{
     height:160px;
     width:160px;
-    background-image: url('img/rightwalk.gif');
+    background-image: url('/img/foe/rightwalk.gif');
 }
 .down{
     height:160px;
     width:160px;
-    background-image: url('img/frontwalk.gif');
+    background-image: url('/img/foe/frontwalk.gif');
+}
+
+/* foe2 */
+
+.left2{
+    height:160px;
+    width:160px;
+    background-image: url('/img/foe2/leftwalk.gif');
+}
+
+.up2{
+    height:160px;
+    width:160px;
+    background-image: url('/img/foe2/backwalk.gif');
+}
+
+.right2{
+    height:160px;
+    width:160px;
+    background-image: url('/img/foe2/rightwalk.gif');
+}
+.down2{
+    height:160px;
+    width:160px;
+    background-image: url('/img/foe2/frontwalk.gif');
+}
+
+/* turret1 */
+.t1s1{
+    background-image: url('/turret/foe2/sprite_1.png');
+}
+.t1s2{
+    background-image: url('/turret/foe2/sprite_2.png');
+}
+.t1s3{
+    background-image: url('/turret/foe2/sprite_3.png');
+}
+.t1s4{
+    background-image: url('/turret/foe2/sprite_4.png');
+}
+.t1s5{
+    background-image: url('/turret/foe2/sprite_5.png');
+}
+.t1s6{
+    background-image: url('/turret/foe2/sprite_6.png');
+}
+.t1s7{
+    background-image: url('/turret/foe2/sprite_7.png');
+}
+.t1s8{
+    background-image: url('/turret/foe2/sprite_8.png');
 }
 
 
+/* goldturret */
+.gts1{
+    background-image: url('/goldturret/sprite_1.png');
+}
+.gts2{
+    background-image: url('/goldturret/sprite_2.png');
+}
+.gts3{
+    background-image: url('/goldturret/sprite_3.png');
+}
+.gts4{
+    background-image: url('/goldturret/sprite_4.png');
+}
+.gts5{
+    background-image: url('/goldturret/sprite_5.png');
+}
+.gts6{
+    background-image: url('/goldturret/sprite_6.png');
+}
+.gts7{
+    background-image: url('/goldturret/sprite_7.png');
+}
+.gts8{
+    background-image: url('/goldturret/sprite_8.png');
+}
+
+/* fastturret */
+.fts1{
+    background-image: url('/fastturret/sprite_1.png');
+}
+.fts2{
+    background-image: url('/fastturret/sprite_2.png');
+}
+.fts3{
+    background-image: url('/fastturret/sprite_3.png');
+}
+.fts4{
+    background-image: url('/fastturret/sprite_4.png');
+}
+.fts5{
+    background-image: url('/fastturret/sprite_5.png');
+}
+.fts6{
+    background-image: url('/fastturret/sprite_6.png');
+}
+.fts7{
+    background-image: url('/fastturret/sprite_7.png');
+}
+.fts8{
+    background-image: url('/fastturret/sprite_8.png');
+}
+
+/* slowturret */
+.sts1{
+    background-image: url('/slowturret/sprite_1.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_2.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_3.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_4.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_5.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_6.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_7.png');
+}
+.sts1{
+    background-image: url('/slowturret/sprite_8.png');
+}
+
+
+.bullet{
+    position: absolute;
+    height:3px;
+    width:6px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 5;
+}
+
+.explode{
+    position:absolute;
+    height:154px;
+    width:60px;
+    background-image: url('/img/explosion20fps.gif');
+}
+
+.explode2{ /* x */
+    position:absolute;
+    height:61px;
+    width:60px;
+    background-image: url('/img/explosion2-60.gif');
+}
 .levelInfo{
     float:right;
     width:150px;
