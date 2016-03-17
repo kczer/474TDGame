@@ -187,12 +187,31 @@
     background-image: url('/img/explosion2-60.gif');
 }
 .levelInfo{
+    float:right;
     width:150px;
-    display:inline-block;
+    display:inline;
 }
 
 .creditPlace{
+    float:left;
     width:150px;
+    display:inline;
+}
+
+.bar{
+    width:700px;
     display:inline-block;
 }
 
+.gameScreen{
+    width:600px;
+    height:600px;
+    background-color: blue;
+    display:block;
+}
+
+/*.leftPlace{*/
+/*}*/
+
+/*.rightPlace{*/
+/*}*/
