@@ -1,5 +1,7 @@
 var TILE_H = 60;
 var TILE_W = 60;
+var testTower = $('#tower');
+var towerChosen = false;
 var clickedTile;
 var lastClickedTile = 'Thrower'; //this will be set when you click the toolbar so it knows what kind of tower to place
 
@@ -10,15 +12,18 @@ var towerPlaceLogic = function(){
 	var tile = document.getElementById(clickedTile);
 	var clickedPositon = $( this ).offset();
   		event.stopPropagation();
-	if(gameGrid.grid[clickedTile].hasTower == false){
+	if(gameGrid.grid[clickedTile].hasTower == true &&  $("body").hasClass("cursor_change")){
+	turnCursorOff();
+	alert("Sorry there is a tower there");
+	}
+	if(gameGrid.grid[clickedTile].hasTower == false &&  $("body").hasClass("cursor_change")){
 		gameGrid.grid[clickedTile].hasTower = true;
 		gameGrid.grid[clickedTile].towerType = lastClickedTile;
+		turnCursorOff();
 		tile.style.backgroundImage = "url('http://www.placecage.com/30/30')";
 		tile.style.backgroundRepeat = "no-repeat";
 		tile.style.backgroundPosition = "center";
 	}
-	else
-	alert("Sorry there is a tower there");
 }
 
 var Grid = function(mapHeight,mapWidth) {
@@ -55,6 +60,24 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 }
+var turnCursorOn = function(e){
+    $("body").toggleClass("cursor_change");
+    testTower.off("click", turnCursorOn);
+    $("body").on("click", turnCursorOff);
+    towerChosen = true;
+    e.stopImmediatePropagation();
+}
+
+var turnCursorOff = function(){
+    if(towerChosen = true){
+    $("body").toggleClass("cursor_change");
+    $("body").off("click", turnCursorOff);
+    testTower.on("click", turnCursorOn);
+    towerChosen = false;
+    }
+}
+
+testTower.on("click", turnCursorOn);
 var gameGrid = new Grid(5,5);
 gameGrid.createGrid();
 console.log(gameGrid.grid["(0,4)"]);
