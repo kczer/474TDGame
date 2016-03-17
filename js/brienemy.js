@@ -18,18 +18,17 @@ $(document).ready(function(){
             $afrank.css("position", "absolute");
             $afrank.css("left", self.posx+"px");
             $afrank.css("top ", self.posy+"px");
+            $afrank.css("height", "60px");
+            $afrank.css("width", "60px");
             
             if (self.type == "basic"){
-                $afrank.css("height", "60px");
-                $afrank.css("width", "60px");
-                $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
+                $afrank.attr("class","down");
                 $('#bg').append($afrank);
                 console.log("i am append");
             
             }else{
-                $afrank.css("height", "60px");
-                $afrank.css("width", "60px");
-                $afrank.css("background-image", "url('/img/foe2/frontwalk.gif')");
+
+                $afrank.attr("class","down2");
                 $('#bg').append($afrank);
                 console.log("aye");
             }
@@ -72,9 +71,9 @@ $(document).ready(function(){
             self.posx-=1;
             console.log("posx: "+self.posx);
             if(self.type == "basic"){
-                $afrank.css("background-image", "url('/img/foe/leftwalk.gif')");
+                $afrank.attr("class","left");
             }else{
-                $afrank.css("background-image", "url('/img/foe2/leftwalk.gif')");   
+                $afrank.attr("class","left2");  
             }
            
         }
@@ -84,9 +83,9 @@ $(document).ready(function(){
             self.posy-=1;
             console.log("posy: "+self.posy);   
             if(self.type == "basic"){
-                $afrank.css("background-image", "url('/img/foe/backwalk.gif')");
+                $afrank.attr("class","up");
             }else{
-                $afrank.css("background-image", "url('/img/foe2/backwalk.gif')");   
+                $afrank.attr("class","up2");  
             }
         }
         
@@ -95,9 +94,9 @@ $(document).ready(function(){
 
             console.log("posx: "+self.posx); 
             if(self.type == "basic"){
-                $afrank.css("background-image", "url('/img/foe/rightwalk.gif')");
+                $afrank.attr("class","right");
             }else{
-                $afrank.css("background-image", "url('/img/foe2/rightwalk.gif')");   
+                $afrank.attr("class","right2");  
             }
         }
         
@@ -107,9 +106,9 @@ $(document).ready(function(){
   
             console.log("posy: "+self.posy); 
             if(self.type == "basic"){
-                $afrank.css("background-image", "url('/img/foe/frontwalk.gif')");
+                $afrank.attr("class","down");
             }else{
-                $afrank.css("background-image", "url('/img/foe2/frontwalk.gif')");   
+                $afrank.attr("class","down2");  
             }
         }
     
