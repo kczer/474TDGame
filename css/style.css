@@ -58,13 +58,18 @@ h1{
     font-size: 4.75em;
     color:#e8e8e8;
     letter-spacing: 10;
+    animation: glow 1s infinite alternate;
 
+}
 
+@keyframes glow {
+    to {
+        text-shadow: 1px 1px 15px #666;
+    }
 }
 
 #apple{
     font-family: 'Poppins', sans-serif;
-    text-shadow: 1px 1px 7px #666;
 }
 
 #fbi{
@@ -74,7 +79,7 @@ h1{
 }
 
 #home{
-    top:30%;
+    top:20%;
     position:absolute;
     width:99%;
     margin: 0 auto;
