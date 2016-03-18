@@ -267,19 +267,23 @@ h1{
 .levelInfo{
     float:right;
     width:150px;
+    font-size:20px;
+    font-weight:bold;
+    font-style:italic;
     display:inline-block;
 }
 
 .creditPlace{
     float:left;
-    width:150px;
+    width:120px;
+    
     display:inline-block;
 }
 
 .wavePlace{
     width:300px;
     height:50px;
-    float:center;
+    text-align:center;
     display:inline-block;
 }
 .towerDisplay{
@@ -291,6 +295,10 @@ h1{
     display:inline-block;
 }
 
+.towerPlace img{
+    width:75px;
+    height:75px;
+}
 
 .bar{
     width:700px;
@@ -305,6 +313,13 @@ h1{
     display:block;
     border-radius: 5px;
     
+}
+
+.gScreen{
+    width:400px;
+    height:400px;
+    /*background-color: blue;*/
+    display:block;
 }
 
 /*.leftPlace{*/
