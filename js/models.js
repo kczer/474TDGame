@@ -120,6 +120,7 @@ var Grid = function(mapHeight,mapWidth) {
     var mapWidth = mapWidth;
     this.grid = {};
     this.towers = {};
+    this.pathTiles = {};
     // create the map zone
 	
     this.createGrid = function() {
@@ -151,6 +152,8 @@ var Grid = function(mapHeight,mapWidth) {
 		}
 	}
 }
+	this.markTileDirections = function() {
+	}
 }
 
 var turnCursorOn = function(e){
