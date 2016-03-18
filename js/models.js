@@ -170,6 +170,7 @@ var Grid = function(mapHeight,mapWidth) {
 				mapzone.style.backgroundColor = "brown";
 				mapzone.style.backgroundImage = "url('/img/pathtile60.png')";
 				this.grid[pos] = pathTile;
+				this.pathTiles[pos] = pathTile;
 			}
 			else
 			{
@@ -181,6 +182,9 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 	this.markTileDirections = function() {
+		for (var pathTile in this.pathTiles){
+			//pathTile.locationX
+		}
 	}
 }
 
