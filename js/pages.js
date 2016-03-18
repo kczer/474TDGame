@@ -2,11 +2,11 @@ var pages = ['home', 'instruction','gameObjects', 'paused'];
 // 'welcome',
 var credits = 100;
 var level = 1;
-var wave = 1;
+var wave = 15;
 var waveMax = 15;
 var currentPageIndex = 0;
 
-var normalTower = ["normal", 100];
+var normalTower = ["url('http://www.placecage.com/30/30')", 100];
 var fastTower = ["fast", 70];
 var slowTower = ["slow", 50];
 var damageTower = ["damage", 150];
@@ -45,12 +45,12 @@ var showPlayGame = function(){
     currentPageIndex = 2;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
-    document.getElementById("tower").classList.remove('hidden');
+    // document.getElementById("tower").classList.remove('hidden');
     showGrid();
     display_Credits();
     display_Wave();
-//    display_last_Wave();
-//    display_Towers();
+    display_last_Wave();
+    display_Towers();
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -130,7 +130,7 @@ var display_Towers = function(){
   Towers.forEach(function(aTower){
     var $TowerCont = document.createElement('div');
     var $TowerDiv = document.createElement('div');
-    $TowerDiv.innerHTML = aTower[0];
+    // $TowerDiv.classList.add(image-Background:aTower[0]);
     $TowerDiv.classList.add('towerPlace');
     var $TowerCost = document.createElement('div');
     $TowerCost.innerHTML = aTower[1];
