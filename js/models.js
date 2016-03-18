@@ -152,6 +152,7 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 }
+
 var turnCursorOn = function(e){
     $("body").toggleClass("cursor_change");
     testTower.off("click", turnCursorOn);
@@ -161,7 +162,7 @@ var turnCursorOn = function(e){
 }
 
 var turnCursorOff = function(){
-    if(towerChosen = true){
+    if(towerChosen == true){
     $("body").toggleClass("cursor_change");
     $("body").off("click", turnCursorOff);
     testTower.on("click", turnCursorOn);
@@ -172,4 +173,3 @@ var turnCursorOff = function(){
 testTower.on("click", turnCursorOn);
 var gameGrid = new Grid(5,5);
 gameGrid.createGrid();
-console.log(gameGrid.grid["(0,4)"]);
