@@ -50,6 +50,18 @@ Similar to Hordes of Orcs???
 
 
 
+
+
+
+
+Shit to do
+
+make the grid less evident, when placing a tower hover over 
+
+
+
+
+
 Game Classes
     Game
         Level
