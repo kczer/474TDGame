@@ -40,7 +40,9 @@ var Grid = function(mapHeight,mapWidth) {
 			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 			mapzone.style.left = (TILE_H*i+200) + "px";
 			mapzone.style.top = (TILE_W*j+200) + "px";
-			document.body.appendChild(mapzone);
+			// document.body.appendChild(mapzone);
+
+			document.getElementById("game").appendChild(mapzone);
 			if(levelOne.indexOf(pos) > -1)
 			{
 				mapzone.style.backgroundColor = "brown";

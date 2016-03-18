@@ -2,7 +2,7 @@ var pages = ['home', 'instruction','gameObjects', 'paused'];
 // 'welcome',
 var credits = 100;
 var level = 1;
-var wave = 15;
+var wave = 1;
 var waveMax = 15;
 var currentPageIndex = 0;
 
@@ -49,8 +49,8 @@ var showPlayGame = function(){
     showGrid();
     display_Credits();
     display_Wave();
-    display_last_Wave();
-    display_Towers();
+//    display_last_Wave();
+//    display_Towers();
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -140,7 +140,6 @@ var display_Towers = function(){
     $TowerCont.appendChild($TowerCost);
     $div.appendChild($TowerCont);
   })
-  
 };
 
 var hideGrid = function(){

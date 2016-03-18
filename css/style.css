@@ -226,6 +226,10 @@ div{
     display:inline-block;
 }
 
+.towerPlace img{
+    width:75px;
+    height:75px;
+}
 
 .bar{
     width:700px;
@@ -237,6 +241,13 @@ div{
     width:600px;
     height:600px;
     background-color: blue;
+    display:block;
+}
+
+.gScreen{
+    width:400px;
+    height:400px;
+    /*background-color: blue;*/
     display:block;
 }
 
