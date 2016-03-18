@@ -1,3 +1,7 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat|Raleway:300|Black+Ops+One|Open+Sans:300|Poppins:300);
+html{
+    font-family: 'Montserrat', sans-serif;
+}
 #bg{
     height: 70vh;
     width: 70vw;
@@ -11,14 +15,70 @@
 
 body{
         background-color:black;
-        }
+}
     
 p{
         color:white;
-    }
+}
 
 div{
     color:white;
+}
+
+.wrap{
+  width: 99%;
+  height: 70px;
+  margin-bottom:50px;
+}
+
+#home button{
+    padding: 25px;
+}
+
+button{
+    appearance: none;
+    background-color:transparent;
+    border:solid 2px white;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: lowercase;
+    color:white;
+    font-size: 120%;
+}
+
+button:hover{
+    color:#666;
+    border:solid 2px #666;
+    transition: 0.75s ease;
+    
+}
+
+h1{
+    font-size: 4.75em;
+    color:#e8e8e8;
+    letter-spacing: 10;
+
+
+}
+
+#apple{
+    font-family: 'Poppins', sans-serif;
+    text-shadow: 1px 1px 7px #666;
+}
+
+#fbi{
+    font-family: 'Black Ops One',cursive;
+     font-size: 1.2em;
+   
+}
+
+#home{
+    top:30%;
+    position:absolute;
+    width:99%;
+    margin: 0 auto;
+    text-align: center;
 }
 
 /* foe */
@@ -236,8 +296,10 @@ div{
 .gameScreen{
     width:600px;
     height:600px;
-    background-color: blue;
+    background-color: navy;
     display:block;
+    border-radius: 5px;
+    
 }
 
 /*.leftPlace{*/

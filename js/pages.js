@@ -80,12 +80,12 @@ var resumeGameInit = function(){
 };
 
 var display_Welcome_Screen = function(){
-  var $div = document.getElementById("titleScreen");
-    $div.innerHTML = '';
-    var $p = document.createElement('p');
-    var text = "Welcome to Apple Vs FBI";
-    $p.innerHTML = text;
-    $div.appendChild($p);  
+  // var $div = document.getElementById("titleScreen");
+  //   $div.innerHTML = '';
+  //   var $h1 = document.createElement('h1');
+  //   var text = "Welcome to Apple Vs FBI";
+  //   $h1.innerHTML = text;
+  //   $div.appendChild($h1);  
 };
 
 var display_Credits = function(){
