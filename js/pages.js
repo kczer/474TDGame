@@ -28,7 +28,7 @@ var showMainMenu = function(){
     currentPageIndex = 0;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
-  hideGrid();
+  hideGrid(5,5);
   document.getElementById("tower").classList.add('hidden');
   display_Welcome_Screen();
 };
@@ -46,7 +46,7 @@ var showPlayGame = function(){
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     document.getElementById("tower").classList.remove('hidden');
-    showGrid();
+    showGrid(5,5);
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -61,7 +61,7 @@ var pauseGame = function(){
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     // display_Credits();
     // display_LevelWave();
-    hideGrid();
+    hideGrid(5,5);
     document.getElementById("tower").classList.add('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -139,21 +139,32 @@ var display_Towers = function(){
   
 };
 
-var hideGrid = function(){
-  for(var j = 0; j < 5; j++)
+var hideGrid = function(x,y){
+  for(var j = 0; j < x; j++)
 	  {
-	   	for(var i = 0; i < 5; i++)
+	   	for(var i = 0; i < y; i++)
 		  {
 		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
-		    document.getElementById(pos).classList.add('hidden');
+		    var isTower = document.getElementById(pos+"_T");
+		    if(isTower)
+		    {
+		      isTower.classList.add('hidden');
+		    }
+		     document.getElementById(pos).classList.add('hidden');
 		  }
 	  }
 }
-var showGrid = function(){
-  for(var j = 0; j < 5; j++)
+var showGrid = function(x,y){
+  for(var j = 0; j < x; j++)
 	  {
-	   	for(var i = 0; i < 5; i++)
+	   	for(var i = 0; i < y; i++)
 		  {
+		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+		    var isTower = document.getElementById(pos+"_T");
+		    if(isTower)
+		    {
+		      isTower.classList.remove('hidden');
+		    }
 		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
 		    document.getElementById(pos).classList.remove('hidden');
 		  }
