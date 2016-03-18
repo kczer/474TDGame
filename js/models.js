@@ -29,12 +29,27 @@ Tower.prototype.sell = function(){
 };
 
 // THIS AREA ADDRESSES THE ENEMY(FBI)
-function Enemy(type, health, armor, speed){
+function Enemy(type, health, armor, speed,direction, x, y){
     this.type = type;
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
     this.health = health;
     this.armor = armor;
     this.speed = speed;
 };
+
+Enemy.prototype.move = function(){
+	if(this.direction === "UP"){
+		this.y += this.speed;
+	}else if(this.direction === "DOWN"){
+		this.y -= this.speed;
+	}else if(this.direction === "LEFT"){
+		this.x -= this.speed;
+	}else if(this.direction === "RIGHT"){
+		this.y += this.speed;
+	}
+}
     
 Enemy.prototype.damage = function(damage){
     this.health -= damage*((100-this.armor)/100);  
@@ -47,7 +62,7 @@ function Game(){
   this.wave = 0;
   this.money = 500;
   this.health = 100;
-  this.Enemies = this.initEnemies(wave);
+  this.Enemies = this.initEnemies(0);
 };
 
 Game.prototype.nextWave = function(){
@@ -55,8 +70,12 @@ Game.prototype.nextWave = function(){
   this.initEnemies();
 };
 
-Game.prototype.initEnemies = function(){
-  this.enemies = [];//Will be changed to dynamic function
+Game.prototype.initEnemies = function(wave){
+	var numenemies = 5 + 5*wave;
+	for(var i = 0; i < numenemies; i++){
+		var en = new Enemy("", 100, 100, 100);
+    	this.enemies.push(en);//Will be changed to dynamic function
+	}
 };
 
 Game.prototype.spendCredits = function(spent){
@@ -80,15 +99,17 @@ Game.prototype.run = function(){
 
 
 Game.prototype.tick = function(){
-	this.moveEnemies();
-	this.shootTowers();
+	var passedtime = new Date().getTime() - Game.prototype.previousTick;
+	Game.prototype.previousTick = new Date().getTime();
+	this.moveEnemies(passedtime);
+	this.shootTowers(passedtime);
 }
 
-Game.prototype.moveEnemies = function(ticks){
+Game.prototype.moveEnemies = function(passedtime){
   //TODO when map is solidified
 }
 
-Game.prototype.shootTowers = function(ticks){
+Game.prototype.shootTowers = function(passedtime){
   //TODO when map is solidified
 }
 
