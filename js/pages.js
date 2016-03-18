@@ -5,6 +5,8 @@ var level = 1;
 var wave = 15;
 var waveMax = 15;
 var currentPageIndex = 0;
+var mapWidth = 10;
+var mapHeight = 15;
 
 var normalTower = ["url('http://www.placecage.com/30/30')", 100];
 var fastTower = ["fast", 70];
@@ -28,7 +30,7 @@ var showMainMenu = function(){
     currentPageIndex = 0;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
-  hideGrid(5,5);
+  hideGrid(mapWidth,mapHeight);
   document.getElementById("tower").classList.add('hidden');
   display_Welcome_Screen();
 };
@@ -53,7 +55,7 @@ var showPlayGame = function(){
     display_last_Wave();
     //display_Towers();
     document.getElementById("tower").classList.remove('hidden');
-    showGrid(5,5);
+    showGrid(mapWidth,mapHeight);
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -68,7 +70,7 @@ var pauseGame = function(){
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
     // display_Credits();
     // display_LevelWave();
-    hideGrid(5,5);
+    hideGrid(mapWidth,mapHeight);
     document.getElementById("tower").classList.add('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };

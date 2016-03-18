@@ -73,6 +73,8 @@ Game.prototype.nextWave = function(){
 Game.prototype.initEnemies = function(wave){
 	var numenemies = 5 + 5*wave;
 	for(var i = 0; i < numenemies; i++){
+		var starttiley= parseInt(levelOne[0].substr(1,2))*TILE_H-.5*TILE_H;
+		var starttilex= parseInt(levelOne[0].substr(3,4))*TILE_W;
 		var en = new Enemy("", 100, 100, 1, "LEFT", 0,0);
     	this.enemies.push(en);//Will be changed to dynamic function
 	}
@@ -215,5 +217,5 @@ var turnCursorOff = function(){
 }
 
 testTower.on("click", turnCursorOn);
-var gameGrid = new Grid(5,5);
+var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
