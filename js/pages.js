@@ -51,7 +51,7 @@ var showPlayGame = function(){
     display_Credits();
     display_Wave();
     display_last_Wave();
-    display_Towers();
+    //display_Towers();
     document.getElementById("tower").classList.remove('hidden');
     showGrid(5,5);
     // document.getElementById("tower").classList.remove('hidden');
