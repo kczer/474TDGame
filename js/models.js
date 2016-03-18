@@ -72,10 +72,31 @@ Game.prototype.damageBase = function(){
   return this.health <= 0;
 };
 
-Game.prototype.tick = function(){
-  this.moveEnemies();
-  this.fireTowers();
-}
+Game.prototype.fps = 60;
+
+Game.prototype.run = (function() {
+  var loops = 0, skipTicks = 1000 / Game.fps,
+      maxFrameSkip = 10,
+      nextGameTick = (new Date).getTime(),
+      lastGameTick;
+
+  return function() {
+    loops = 0;
+
+    while ((new Date).getTime() > nextGameTick) {
+      Game.update();
+      nextGameTick += skipTicks;
+      loops++;
+    }
+
+    if (!loops) {
+      Game.draw((nextGameTick - (new Date).getTime()) / skipTicks);
+    } else {
+      Game.draw(0);
+    }
+  };
+})();
+
 
 Game.prototype.moveEnemies = function(){
   //TODO when map is solidified
@@ -152,6 +173,7 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 }
+
 var turnCursorOn = function(e){
     $("body").toggleClass("cursor_change");
     testTower.off("click", turnCursorOn);
@@ -161,7 +183,7 @@ var turnCursorOn = function(e){
 }
 
 var turnCursorOff = function(){
-    if(towerChosen = true){
+    if(towerChosen == true){
     $("body").toggleClass("cursor_change");
     $("body").off("click", turnCursorOff);
     testTower.on("click", turnCursorOn);
@@ -172,4 +194,3 @@ var turnCursorOff = function(){
 testTower.on("click", turnCursorOn);
 var gameGrid = new Grid(5,5);
 gameGrid.createGrid();
-console.log(gameGrid.grid["(0,4)"]);
