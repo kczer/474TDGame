@@ -72,10 +72,31 @@ Game.prototype.damageBase = function(){
   return this.health <= 0;
 };
 
-Game.prototype.tick = function(){
-  this.moveEnemies();
-  this.fireTowers();
-}
+Game.prototype.fps = 60;
+
+Game.prototype.run = (function() {
+  var loops = 0, skipTicks = 1000 / Game.fps,
+      maxFrameSkip = 10,
+      nextGameTick = (new Date).getTime(),
+      lastGameTick;
+
+  return function() {
+    loops = 0;
+
+    while ((new Date).getTime() > nextGameTick) {
+      Game.update();
+      nextGameTick += skipTicks;
+      loops++;
+    }
+
+    if (!loops) {
+      Game.draw((nextGameTick - (new Date).getTime()) / skipTicks);
+    } else {
+      Game.draw(0);
+    }
+  };
+})();
+
 
 Game.prototype.moveEnemies = function(){
   //TODO when map is solidified
