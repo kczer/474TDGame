@@ -9,8 +9,23 @@ html{
 }
 
 #tower{
-    height:150px;
-    width:150px;    
+    height:60px;
+    width:60px;    
+}
+
+#slowturret{
+    height: 60px;
+    width: 60px;
+}
+
+#goldturret{
+    height: 60px;
+    width: 60px;
+}
+
+#fastturret{
+    height: 60px;
+    width: 60px;
 }
 
 body{
