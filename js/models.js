@@ -39,15 +39,15 @@ function Enemy(type, health, armor, speed,direction, x, y){
     this.speed = speed;
 };
 
-Enemy.prototype.move = function(){
+Enemy.prototype.move = function(passedtime){
 	if(this.direction === "UP"){
-		this.y += this.speed;
+		this.y += passedtime*this.speed;
 	}else if(this.direction === "DOWN"){
-		this.y -= this.speed;
+		this.y -= passedtime*this.speed;
 	}else if(this.direction === "LEFT"){
-		this.x -= this.speed;
+		this.x -= passedtime*this.speed;
 	}else if(this.direction === "RIGHT"){
-		this.y += this.speed;
+		this.y += passedtime*this.speed;
 	}
 }
     
@@ -73,7 +73,7 @@ Game.prototype.nextWave = function(){
 Game.prototype.initEnemies = function(wave){
 	var numenemies = 5 + 5*wave;
 	for(var i = 0; i < numenemies; i++){
-		var en = new Enemy("", 100, 100, 100);
+		var en = new Enemy("", 100, 100, 1, "LEFT", 0,0);
     	this.enemies.push(en);//Will be changed to dynamic function
 	}
 };
@@ -107,6 +107,15 @@ Game.prototype.tick = function(){
 
 Game.prototype.moveEnemies = function(passedtime){
   //TODO when map is solidified
+  for (var enemy in this.enemies){
+  	this.checkDirection(enemy);
+  	enemy.move(passedtime);
+  	//stuff
+  }
+}
+
+Game.prototype.checkDirection = function(enemy){
+	
 }
 
 Game.prototype.shootTowers = function(passedtime){
