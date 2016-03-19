@@ -272,18 +272,15 @@ var turnCursorOff = function(){
     	towerChosen = false;
     }
 }
-<<<<<<< HEAD
-testTower.on("click", turnCursorOn);
-=======
 
 regularTower.on("click", turnCursorOn);
 slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
 goldTower.on("click", turnCursorOn);
->>>>>>> d1f478aadfbe1f17c028e01992504c452c966dca
+
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.initEnemies(0);
-//newGame.run();
+newGame.run();
