@@ -9,8 +9,18 @@ var clickedTile;
 var lastClickedTile = 'Thrower'; //this will be set when you click the toolbar so it knows what kind of tower to place
 var previousTick=new Date().getTime();
 var ticks = 0;
+var idnum = 0;
 
-var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
+//var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
+//var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
+
+var levelOne = ["(9,0)","(9,1)","(8,1)","(7,1)","(6,1)","(5,1)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(1,4)","(1,5)","(2,5)","(3,5)","(4,5)","(4,6)","(4,7)","(5,7)","(6,7)","(7,7)","(8,7)","(8,8)","(8,9)","(8,10)","(8,11)","(7,11)","(6,11)","(5,11)","(4,11)","(3,11)","(2,11)","(1,11)","(1,12)","(1,13)","(1,14)",];//37 tiles
+
+// V shaped -- var levelOne = ["(0,0)","(0,1)","(1,1)","(1,2)","(2,2)","(2,3)","(3,3)","(3,4)","(4,4)","(4,5)","(5,5)","(4,5)","(5,6)","(6,6)","(6,7)","(7,7)","(7,8)","(7,9)","(6,9)","(6,10)","(5,10)","(5,11)","(4,11)","(4,12)","(3,12)","(3,13)","(2,13)","(2,14)","(1,14)"];//28 tiles
+
+//twisty -- var levelOne = ["(1,0)","(1,1)","(1,2)","(1,3)","(1,4)","(2,4)","(3,4)","(3,3)","(3,2)","(3,1)","(4,1)","(5,1)","(5,2)","(5,3)","(5,4)","(5,5)","(5,6)","(6,6)","(7,6)","(7,5)","(7,4)","(7,3)","(7,2)","(7,1)","(8,1)","(9,1)","(9,2)","(9,3)","(9,4)","(9,5)","(9,6)","(9,7)","(9,8)","(8,8)","(7,8)","(6,8)","(5,8)","(4,8)","(3,8)","(2,8)","(1,8)","(0,8)","(0,9)","(0,10)","(0,11)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(5,12)","(5,13)","(4,13)","(3,13)","(2,13)","(1,13)","(1,14)"];//56 tiles
+
+//var levelOne = ["(5,0)","(5,1)","(4,1)","(4,2)","(3,2)" ,"(2,3)","(3,3)","(2,4)","(1,4)","(1,5)","(0,5)","(0,6)","(0,7)","(1,7)","(2,7)","(2,6)","(3,6)","(4,6)","(5,6)", "(6,6)","(7,6)","(8,6)","(8,7)","(8,8)","(8,9)","(8,10)","(7,10)","(6,10)","(5,10)","(5,9)","(4,9)","(3,9)","(3,10)","(2,10)","(1,10)","(1,11)","(1,12)","(2,12)","(3,12)","(3,13)","(4,13)","(5,13)","(5,12)","(6,12)","(7,12)","(8,12)","(8,13)","(9,13)","(9,14)"];//45 tiles
 
 
 // THIS FILE DEALS WITH THE CLASSES FOR THE GAME OBJECTS
@@ -100,7 +110,8 @@ var moveEnemy = function(enemy, passedtime, me){
 			}
 			ticks = 0;
 		}
-		return {type : enemy.type, health: enemy.health, speed : enemy.speed, direction : enemy.direction, x : x, y : y};
+		console.log("id2:"+enemy.id);
+		return {type : enemy.type, health: enemy.health, speed : enemy.speed, direction : enemy.direction, x : x, y : y, id: enemy.id, starttime: enemy.starttime};
 		
 	}
 	
@@ -153,7 +164,9 @@ var Game = function(){
 			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
 			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
-			var en = {type : "", health: 100, speed : 1, direction : "RIGHT", x : starttilex, y : starttiley};
+			var en = {type : "", health: 100, speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
+			console.dir("en:"+en.id);
+			idnum ++;
     		this.enemies.push(en);
 		}
 		console.log("enemies:"+this.enemies);
@@ -180,15 +193,22 @@ var Game = function(){
 	
 	this.drawEnemies = function(){
 		for( var enemy in this.enemies){
-			var newTowerDiv = document.createElement("div");
-			newTowerDiv.setAttribute("id",(clickedTile + "_T"));
-			newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
-			newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
-			newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
-			newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
-			newTowerDiv.style.backgroundRepeat = "no-repeat";
-			newTowerDiv.style.backgroundPosition = "center";
-			document.body.appendChild(newTowerDiv);
+			var myElem = document.getElementById(this.enemies[enemy].id);
+			console.log("id"+this.enemies[enemy].id);
+			if (myElem === null){
+				var newTowerDiv = document.createElement("div");
+				newTowerDiv.setAttribute("id",this.enemies[enemy].id);
+				newTowerDiv.setAttribute("class","mapzone"); 
+				newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
+				newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
+				newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
+				newTowerDiv.style.backgroundRepeat = "no-repeat";
+				newTowerDiv.style.backgroundPosition = "center";
+				document.body.appendChild(newTowerDiv);
+			}else{
+				myElem.style.left= this.enemies[enemy].y+200;
+				myElem.style.top = this.enemies[enemy].x+200
+			}
 		}
 	}
 
@@ -208,6 +228,7 @@ var Game = function(){
   			console.log("enemys:"+this.enemies[enemy]);
   			this.enemies[enemy].direction = checkDirection(this.enemies[enemy]);
   			this.enemies[enemy] = moveEnemy(this.enemies[enemy], this.passedTime );
+  			console.log("here?:"+this.enemies[enemy].id)
   			//this.enemies[enemy] = checkDirection(this.enemies[enemy]);
   			//this.enemies[enemy].checkDirection();
   			//this.enemies[enemy].move(this.passedTime);
