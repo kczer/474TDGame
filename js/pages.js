@@ -55,6 +55,9 @@ var showPlayGame = function(){
     display_last_Wave();
     //display_Towers();
     document.getElementById("tower").classList.remove('hidden');
+    document.getElementById("slowTurret").classList.remove('hidden');
+    document.getElementById("fastTurret").classList.remove('hidden');
+    document.getElementById("goldTurre").classList.remove('hidden');
     showGrid(mapWidth,mapHeight);
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 

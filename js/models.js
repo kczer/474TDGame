@@ -1,6 +1,9 @@
 var TILE_H = 60;
 var TILE_W = 60;
-var testTower = $('#tower');
+var regularTower = $('#tower');
+var slowTower = $('#slowTurret');
+var fastTower = $('#fastTurret');
+var goldTower = $('#goldTurret');
 var towerChosen = false;
 var clickedTile;
 var lastClickedTile = 'Thrower'; //this will be set when you click the toolbar so it knows what kind of tower to place
@@ -145,6 +148,7 @@ Game.prototype.shootTowers = function(passedtime){
 
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
+	console.log(clickedTile);
 	var tile = document.getElementById(clickedTile);
 	var clickedPositon = $( this ).offset();
   		event.stopPropagation();
@@ -239,22 +243,44 @@ var Grid = function(mapHeight,mapWidth) {
 }
 
 var turnCursorOn = function(e){
+	
+	//Shit that I added
+	var clickedTower = this.id;
+	$("body").addClass(clickedTower);
+	$("body").addClass("cursor_change");
+	regularTower.off("click", turnCursorOn);
+	$("body").on("click", turnCursorOff);
+    towerChosen = true;
+    e.stopImmediatePropagation();
+	//
+	
+	/*
     $("body").toggleClass("cursor_change");
-    testTower.off("click", turnCursorOn);
+    regularTower.off("click", turnCursorOn);
     $("body").on("click", turnCursorOff);
     towerChosen = true;
     e.stopImmediatePropagation();
+    */
 }
 
 var turnCursorOff = function(){
     if(towerChosen == true){
-    $("body").toggleClass("cursor_change");
-    $("body").off("click", turnCursorOff);
-    testTower.on("click", turnCursorOn);
-    towerChosen = false;
+    	$("body").removeClass();
+    	//$("body").toggleClass("cursor_change");
+    	$("body").off("click", turnCursorOff);
+    	regularTower.on("click", turnCursorOn);
+    	towerChosen = false;
     }
 }
+<<<<<<< HEAD
 testTower.on("click", turnCursorOn);
+=======
+
+regularTower.on("click", turnCursorOn);
+slowTower.on("click", turnCursorOn);
+fastTower.on("click", turnCursorOn);
+goldTower.on("click", turnCursorOn);
+>>>>>>> d1f478aadfbe1f17c028e01992504c452c966dca
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 gameGrid.markTileDirections();
