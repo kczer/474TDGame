@@ -50,6 +50,13 @@ Enemy.prototype.move = function(passedtime){
 		this.y += passedtime*this.speed;
 	}
 }
+
+Enemy.prototype.checkDirection = function(){
+	var tilex = Math.floor(this.x/TILE_W);
+	var tiley = Math.floor(this.y/TILE_H);
+	var pos = "(" + tilex + "," + tiley + ")";
+	this.direction = gameGrid.grid[pos].nextDirection;
+}
     
 Enemy.prototype.damage = function(damage){
     this.health -= damage*((100-this.armor)/100);  
@@ -62,7 +69,7 @@ function Game(){
   this.wave = 0;
   this.money = 500;
   this.health = 100;
-  this.Enemies = this.initEnemies(0);
+  this.enemies = [];
 };
 
 Game.prototype.nextWave = function(){
@@ -75,9 +82,10 @@ Game.prototype.initEnemies = function(wave){
 	for(var i = 0; i < numenemies; i++){
 		var starttiley= parseInt(levelOne[0].substr(1,2))*TILE_H-.5*TILE_H;
 		var starttilex= parseInt(levelOne[0].substr(3,4))*TILE_W;
-		var en = new Enemy("", 100, 100, 1, "LEFT", 0,0);
+		var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
     	this.enemies.push(en);//Will be changed to dynamic function
 	}
+	console.log("enemies:"+this.enemies);
 };
 
 Game.prototype.spendCredits = function(spent){
@@ -105,19 +113,30 @@ Game.prototype.tick = function(){
 	Game.prototype.previousTick = new Date().getTime();
 	this.moveEnemies(passedtime);
 	this.shootTowers(passedtime);
+	this.drawEnemies();
 }
 
 Game.prototype.moveEnemies = function(passedtime){
   //TODO when map is solidified
   for (var enemy in this.enemies){
-  	this.checkDirection(enemy);
+  	enemy.checkDirection();
   	enemy.move(passedtime);
   	//stuff
   }
 }
 
-Game.prototype.checkDirection = function(enemy){
-	
+Game.prototype.drawEnemies = new function(){
+	for( var enemy in this.enemies){
+		var newTowerDiv = document.createElement("div");
+		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
+		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+		newTowerDiv.style.left = enemy.x + "px";
+		newTowerDiv.style.top = enemy.y + "px";
+		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
+		newTowerDiv.style.backgroundRepeat = "no-repeat";
+		newTowerDiv.style.backgroundPosition = "center";
+		document.body.appendChild(newTowerDiv);
+	}
 }
 
 Game.prototype.shootTowers = function(passedtime){
@@ -135,7 +154,7 @@ var towerPlaceLogic = function(){
 	}
 	if(gameGrid.grid[clickedTile.substring(0,5)].hasTower == false &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20) //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
@@ -193,8 +212,28 @@ var Grid = function(mapHeight,mapWidth) {
 	}
 }
 	this.markTileDirections = function() {
-		for (var pathTile in this.pathTiles){
-			//pathTile.locationX
+		for (var i = 0; i <levelOne.length;i++){
+			var tiley= parseInt(levelOne[i].substr(1,2));
+			var tilex= parseInt(levelOne[i].substr(3,4));
+			var pos = "(" + tiley + "," + tilex + ")";
+			if(i<levelOne.length-1){
+				var nexttiley= parseInt(levelOne[i+1].substr(1,2));
+				var nexttilex= parseInt(levelOne[i+1].substr(3,4));
+				if(tiley-nexttiley==1){
+					this.pathTiles[pos].nextDirection="UP";	
+				}else if (tiley-nexttiley==-1){
+					this.pathTiles[pos].nextDirection="DOWN";	
+				}else if (tilex-nexttilex==1){
+					this.pathTiles[pos].nextDirection="LEFT";	
+				}else if (tilex-nexttilex==-1){
+					this.pathTiles[pos].nextDirection="RIGHT";	
+				}else{
+					console.log("ERR: ("+tilex+","+tiley+"), ("+nexttilex+","+nexttiley+")");
+				}
+			}else{
+				this.pathTiles[pos].nextDirection="RIGHT";
+			}
+			console.log("dir:"+this.pathTiles[pos].nextDirection);
 		}
 	}
 }
@@ -215,7 +254,10 @@ var turnCursorOff = function(){
     towerChosen = false;
     }
 }
-
 testTower.on("click", turnCursorOn);
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
+gameGrid.markTileDirections();
+var newGame = new Game();
+newGame.initEnemies(0);
+//newGame.run();
