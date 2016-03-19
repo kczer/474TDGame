@@ -19,18 +19,19 @@ function Tower(name, fireRate, damage, range, cost){
     this.damage = damage;
     this.cost = cost;
     this.range = range;
-};
+}
 
 Tower.prototype.upgrade = function(cost, fireRate, damage){
   this.cost += cost;
   this.fireRate = fireRate;
   this.damage = damage;
-};
+}
 
 Tower.prototype.sell = function(){
   return Math.floor(this.cost * .8);  
-};
+}
 
+/*
 // THIS AREA ADDRESSES THE ENEMY(FBI)
 function Enemy(type, health, armor, speed,direction, x, y){
     this.type = type;
@@ -40,110 +41,153 @@ function Enemy(type, health, armor, speed,direction, x, y){
     this.health = health;
     this.armor = armor;
     this.speed = speed;
-};
-
-Enemy.prototype.move = function(passedtime){
-	if(this.direction === "UP"){
-		this.y += passedtime*this.speed;
-	}else if(this.direction === "DOWN"){
-		this.y -= passedtime*this.speed;
-	}else if(this.direction === "LEFT"){
-		this.x -= passedtime*this.speed;
-	}else if(this.direction === "RIGHT"){
-		this.y += passedtime*this.speed;
+   this.checkDirection = function(){
+		var tilex = Math.floor(this.x/TILE_W);
+		var tiley = Math.floor(this.y/TILE_H);
+		var pos = "(" + tilex + "," + tiley + ")";
+		this.direction = gameGrid.grid[pos].nextDirection;
 	}
-}
-
-Enemy.prototype.checkDirection = function(){
-	var tilex = Math.floor(this.x/TILE_W);
-	var tiley = Math.floor(this.y/TILE_H);
-	var pos = "(" + tilex + "," + tiley + ")";
-	this.direction = gameGrid.grid[pos].nextDirection;
+	
+	this.move = function(passedtime){
+		if(this.direction === "UP"){
+			this.y += passedtime*this.speed;
+		}else if(this.direction === "DOWN"){
+			this.y -= passedtime*this.speed;
+		}else if(this.direction === "LEFT"){
+			this.x -= passedtime*this.speed;
+		}else if(this.direction === "RIGHT"){
+			this.y += passedtime*this.speed;
+		}else{
+			console.log("err:"+passedtime+","+this.direction)
+		}
+	}
 }
     
 Enemy.prototype.damage = function(damage){
     this.health -= damage*((100-this.armor)/100);  
     return this.health <= 0;
-};
+}
+*/
 
+var moveEnemy = function(enemy, passedtime){
+		var y = enemy.y;
+		var x = enemy.x;
+		if(enemy.direction === "UP"){
+			x -= passedtime*enemy.speed;
+		}else if(enemy.direction === "DOWN"){
+			x += passedtime*enemy.speed;
+		}else if(enemy.direction === "LEFT"){
+			y -= passedtime*enemy.speed;
+		}else if(enemy.direction === "RIGHT"){
+			y += passedtime*enemy.speed;
+		}else{
+			console.log("err:"+passedtime+","+enemy.direction)
+		}
+		return {type : enemy.type, health: enemy.health, speed : enemy.speed, direction : enemy.direction, x : x, y : y};
+	}
+	
+var checkDirection = function(enemy){
+		var tilex = Math.floor((enemy.x+TILE_H*.5)/TILE_W);
+		var tiley = Math.floor((enemy.y+TILE_H*.5)/TILE_H);
+		var pos = "(" + tilex + "," + tiley + ")";
+		console.log("pos:"+pos)
+		console.dir(gameGrid.pathTiles[pos]);
+		return gameGrid.pathTiles[pos].nextDirection;
+}
 
 // THIS AREA ADDRESSES THE GAME
-function Game(){
+var Game = function(){
   this.wave = 0;
   this.money = 500;
   this.health = 100;
   this.enemies = [];
-};
-
-Game.prototype.nextWave = function(){
-  this.wave ++;
-  this.initEnemies();
-};
-
-Game.prototype.initEnemies = function(wave){
-	var numenemies = 5 + 5*wave;
-	for(var i = 0; i < numenemies; i++){
-		var starttiley= parseInt(levelOne[0].substr(1,2))*TILE_H-.5*TILE_H;
-		var starttilex= parseInt(levelOne[0].substr(3,4))*TILE_W;
-		var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
-    	this.enemies.push(en);//Will be changed to dynamic function
+  this.passedTime = 0;
+  this.previousTick=new Date().getTime();
+  this.fps = 30;
+  
+  	this.nextWave = function(){ 
+  		this.wave ++;
+  		this.initEnemies();
 	}
-	console.log("enemies:"+this.enemies);
-};
 
-Game.prototype.spendCredits = function(spent){
-  this.credits -= spent;  
-};
-
-Game.prototype.earnedCredits = function(earn){
-  this.credits += earn;  
-};
-
-Game.prototype.damageBase = function(){
-  this.health -=1;
-  return this.health <= 0;
-};
-
-Game.prototype.fps = 30;
-
-Game.prototype.run = function(){
-	Game.prototype._intervalId = setInterval(this.tick, 1000 / Game.fps);
-}
-
-
-Game.prototype.moveEnemies = function(passedtime){
-  for (var enemy in this.enemies){
-  	enemy.checkDirection();
-  	enemy.move(passedtime);
-  	//stuff
-  }
-}
-
-Game.prototype.tick = function(){
-	var passedtime = new Date().getTime() - Game.prototype.previousTick;
-	Game.prototype.previousTick = new Date().getTime();
-	this.moveEnemies(passedtime);
-	this.shootTowers(passedtime);
-	this.drawEnemies();
-}
-
-Game.prototype.drawEnemies = new function(){
-	for( var enemy in this.enemies){
-		var newTowerDiv = document.createElement("div");
-		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
-		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
-		newTowerDiv.style.left = enemy.x + "px";
-		newTowerDiv.style.top = enemy.y + "px";
-		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
-		newTowerDiv.style.backgroundRepeat = "no-repeat";
-		newTowerDiv.style.backgroundPosition = "center";
-		document.body.appendChild(newTowerDiv);
+	this.initEnemies = function(wave){
+		var numenemies = 5 + 5*wave;
+		for(var i = 0; i < numenemies; i++){
+			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H-.5*TILE_H;
+			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
+			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
+			var en = {type : "", health: 100, speed : 1, direction : "RIGHT", x : starttilex, y : starttiley};
+    		this.enemies.push(en);
+		}
+		console.log("enemies:"+this.enemies);
 	}
+
+	this.spendCredits = function(spent){
+  		this.credits -= spent;  
+	}
+
+	this.earnedCredits = function(earn){
+  		this.credits += earn;  
+	}
+
+	this.damageBase = function(){
+  		this.health -=1;
+  		return this.health <= 0;
+	}
+
+
+	this.run = function(){
+		var me = this;
+		this._intervalId = setInterval(this.tick(me), 1000 / Game.fps);
+	}
+	
+	this.drawEnemies = function(){
+		for( var enemy in this.enemies){
+			var newTowerDiv = document.createElement("div");
+			newTowerDiv.setAttribute("id",(clickedTile + "_T"));
+			newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+			newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
+			newTowerDiv.style.top = this.enemies[enemy].x+200+TILE_H*.5 + "px";
+			newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
+			newTowerDiv.style.backgroundRepeat = "no-repeat";
+			newTowerDiv.style.backgroundPosition = "center";
+			document.body.appendChild(newTowerDiv);
+		}
+	}
+
+	this.tick = function(me){
+		console.log("tick");
+		me.passedTime = new Date().getTime() - me.previousTick;
+		me.previousTick = new Date().getTime();
+		me.moveEnemies();
+		me.shootTowers();
+		me.drawEnemies();
+	}
+	
+	this.getThis = function(){
+		return this;
+	}
+
+	this.moveEnemies = function(){
+  		for (var enemy in this.enemies){
+  			console.log("enemys:"+this.enemies[enemy]);
+  			this.enemies[enemy].direction = checkDirection(this.enemies[enemy]);
+  			this.enemies[enemy] = moveEnemy(this.enemies[enemy], this.passedTime );
+  			//this.enemies[enemy] = checkDirection(this.enemies[enemy]);
+  			//this.enemies[enemy].checkDirection();
+  			//this.enemies[enemy].move(this.passedTime);
+  			//stuff
+  		}
+	}
+	
+
+	this.shootTowers = function(){
+  		//TODO when map is solidified
+	}
+	
 }
 
-Game.prototype.shootTowers = function(passedtime){
-  //TODO when map is solidified
-}
+
 
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
@@ -175,6 +219,7 @@ var towerPlaceLogic = function(){
 		document.body.appendChild(newTowerDiv);
 	}
 }
+
 
 var Grid = function(mapHeight,mapWidth) {
     var mapHeight = mapHeight;
@@ -213,6 +258,7 @@ var Grid = function(mapHeight,mapWidth) {
 			}
 		}
 	}
+	this.markTileDirections();
 }
 	this.markTileDirections = function() {
 		for (var i = 0; i <levelOne.length;i++){
@@ -240,6 +286,7 @@ var Grid = function(mapHeight,mapWidth) {
 		}
 	}
 }
+
 
 var turnCursorOn = function(e){
 	
@@ -279,7 +326,9 @@ goldTower.on("click", turnCursorOn);
 
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
-gameGrid.markTileDirections();
+//gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.initEnemies(0);
 //newGame.run();
+var me =newGame.getThis();
+setInterval(function() { newGame.tick(me) }, 1000 / newGame.fps);
