@@ -1,3 +1,7 @@
+*{
+     border: dotted 1px white ;
+}
+
 .hidden {
     display: none;
 }

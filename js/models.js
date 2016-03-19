@@ -272,11 +272,12 @@ var towerPlaceLogic = function(){
 	var tile = document.getElementById(clickedTile);
 	var clickedPositon = $( this ).offset();
   		event.stopPropagation();
+	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
 	turnCursorOff();
 	alert("Sorry there is a tower there");
 	}
-	if(gameGrid.grid[clickedTile.substring(0,5)].hasTower == false &&  $("body").hasClass("cursor_change")){
+	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
 		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
@@ -294,6 +295,32 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
 		document.body.appendChild(newTowerDiv);
+	}
+	}
+	if(gameGrid.grid[clickedTile.substring(0,6)]){
+	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
+	turnCursorOff();
+	alert("Sorry there is a tower there");
+	}
+	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change")){
+		var newTowerDiv = document.createElement("div");
+		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
+		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
+		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
+		gameGrid.towers[clickedTile] = newTowerObj; 
+		console.log(gameGrid.towers[clickedTile]); //array of tower objects indexed at location on grid
+		gameGrid.grid[clickedTile].hasTower = true;
+		gameGrid.grid[clickedTile].towerType = lastClickedTile;
+		console.log(gameGrid.grid[clickedTile]); //updated grid tile to reflect having tower 
+		turnCursorOff();
+		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
+		newTowerDiv.style.backgroundRepeat = "no-repeat";
+		newTowerDiv.style.backgroundPosition = "center";
+		newTowerDiv.addEventListener("click",towerPlaceLogic);
+		document.body.appendChild(newTowerDiv);
+	}
 	}
 }
 
