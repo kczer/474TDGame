@@ -7,6 +7,8 @@ var goldTower = $('#goldTurret');
 var towerChosen = false;
 var clickedTile;
 var lastClickedTile = 'Thrower'; //this will be set when you click the toolbar so it knows what kind of tower to place
+var previousTick=new Date().getTime();
+var ticks = 0;
 
 var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 
@@ -69,26 +71,61 @@ Enemy.prototype.damage = function(damage){
 }
 */
 
-var moveEnemy = function(enemy, passedtime){
+var moveEnemy = function(enemy, passedtime, me){
 		var y = enemy.y;
 		var x = enemy.x;
-		if(enemy.direction === "UP"){
-			x -= passedtime*enemy.speed;
-		}else if(enemy.direction === "DOWN"){
-			x += passedtime*enemy.speed;
-		}else if(enemy.direction === "LEFT"){
-			y -= passedtime*enemy.speed;
-		}else if(enemy.direction === "RIGHT"){
-			y += passedtime*enemy.speed;
-		}else{
-			console.log("err:"+passedtime+","+enemy.direction)
+		var time = new Date()
+		/*
+		var passedTime = time.getTime();
+		console.log ("passed"+passedTime);
+		passedtime = passedtime- previousTick;
+		console.log("time:"+passedtime);
+		console.log("prev:"+previousTick);
+		console.log("curr:"+(new Date().getTime()));
+		*/
+		ticks ++;
+		console.log("ticks"+ticks);
+		if(ticks > 10){
+			//previousTick = new Date().getTime();
+			if(enemy.direction === "UP"){
+				x -= ticks*enemy.speed;
+			}else if(enemy.direction === "DOWN"){
+				x += ticks*enemy.speed;
+			}else if(enemy.direction === "LEFT"){
+				y -= ticks*enemy.speed;
+			}else if(enemy.direction === "RIGHT"){
+				y += ticks*enemy.speed;
+			}else{
+				console.log("err:"+passedtime+","+enemy.direction)
+			}
+			ticks = 0;
 		}
 		return {type : enemy.type, health: enemy.health, speed : enemy.speed, direction : enemy.direction, x : x, y : y};
+		
 	}
 	
 var checkDirection = function(enemy){
-		var tilex = Math.floor((enemy.x+TILE_H*.5)/TILE_W);
-		var tiley = Math.floor((enemy.y+TILE_H*.5)/TILE_H);
+     	var tiley = Math.floor((enemy.y)/TILE_H);
+     	var tilex = 0;
+		if(enemy.direction=="UP"){
+		 	tilex = Math.ceil((enemy.x)/TILE_W);
+		 	var pos = "(" + tilex + "," + tiley + ")";
+			var testvar = gameGrid.pathTiles[pos];
+			if (typeof testvar == 'undefined'){
+				tilex = Math.floor((enemy.x)/TILE_W);
+			}
+		}else{
+			tilex = Math.floor((enemy.x)/TILE_W);
+			var pos = "(" + tilex + "," + tiley + ")";
+			var testvar = gameGrid.pathTiles[pos];
+			if (typeof testvar == 'undefined'){
+				tilex = Math.ceil((enemy.x)/TILE_W);
+			}
+		}
+		
+		
+		
+		//var tilex = Math.floor((enemy.x)/TILE_W);
 		var pos = "(" + tilex + "," + tiley + ")";
 		console.log("pos:"+pos)
 		console.dir(gameGrid.pathTiles[pos]);
@@ -113,7 +150,7 @@ var Game = function(){
 	this.initEnemies = function(wave){
 		var numenemies = 5 + 5*wave;
 		for(var i = 0; i < numenemies; i++){
-			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H-.5*TILE_H;
+			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
 			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
 			var en = {type : "", health: 100, speed : 1, direction : "RIGHT", x : starttilex, y : starttiley};
@@ -147,7 +184,7 @@ var Game = function(){
 			newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 			newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 			newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
-			newTowerDiv.style.top = this.enemies[enemy].x+200+TILE_H*.5 + "px";
+			newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 			newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
 			newTowerDiv.style.backgroundRepeat = "no-repeat";
 			newTowerDiv.style.backgroundPosition = "center";
@@ -157,9 +194,7 @@ var Game = function(){
 
 	this.tick = function(me){
 		console.log("tick");
-		me.passedTime = new Date().getTime() - me.previousTick;
-		me.previousTick = new Date().getTime();
-		me.moveEnemies();
+		me.moveEnemies(me);
 		me.shootTowers();
 		me.drawEnemies();
 	}
