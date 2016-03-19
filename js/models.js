@@ -111,21 +111,20 @@ Game.prototype.run = function(){
 }
 
 
+Game.prototype.moveEnemies = function(passedtime){
+  for (var enemy in this.enemies){
+  	enemy.checkDirection();
+  	enemy.move(passedtime);
+  	//stuff
+  }
+}
+
 Game.prototype.tick = function(){
 	var passedtime = new Date().getTime() - Game.prototype.previousTick;
 	Game.prototype.previousTick = new Date().getTime();
 	this.moveEnemies(passedtime);
 	this.shootTowers(passedtime);
 	this.drawEnemies();
-}
-
-Game.prototype.moveEnemies = function(passedtime){
-  //TODO when map is solidified
-  for (var enemy in this.enemies){
-  	enemy.checkDirection();
-  	enemy.move(passedtime);
-  	//stuff
-  }
 }
 
 Game.prototype.drawEnemies = new function(){
@@ -283,4 +282,4 @@ gameGrid.createGrid();
 gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.initEnemies(0);
-newGame.run();
+//newGame.run();
