@@ -145,6 +145,7 @@ var checkDirection = function(enemy){
 		}catch(err){
 			console.log("enemy off board");
 			lives --;
+			 
 			var elem = document.getElementById(enemy.id);
 			if(elem !=null){
 				elem.parentNode.removeChild(elem);
@@ -167,6 +168,8 @@ var Game = function(){
 		console.log("wave:"+wave);
 		var numenemies = 5;
 		this.enemies = [];
+		var $div = document.getElementById("levelWaveDisplay");
+  		$div.innerHTML = "<p>Wave: " + this.wave + "/" + 15+"</p>";
 		for(var i = 0; i < numenemies; i++){
 			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
@@ -174,6 +177,7 @@ var Game = function(){
 			var en = {type : "", health: 100+(25*wave), speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
 			idnum ++;
     		this.enemies.push(en);
+    		
 		}
 	}
 
@@ -258,10 +262,7 @@ var Game = function(){
   				this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
   			}else{
   				if (deadenemies==this.enemies.length){
-  					console.log("i:"+i);
-  					console.log("wave1:"+this.wave);
   					this.wave ++;
-  					console.log("wave2:"+this.wave);
   					me.initEnemies(this.wave);
   					numticks = 0;
   					deadenemies = 0;
@@ -452,5 +453,6 @@ gameGrid.createGrid();
 var newGame = new Game();
 newGame.initEnemies(wave);
 //newGame.run();
+//fieldNameElement.innerHTML = "My new text!";
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me) }, 1000 / newGame.fps);

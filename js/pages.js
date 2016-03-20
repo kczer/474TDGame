@@ -2,7 +2,7 @@ var pages = ['home', 'instruction','gameObjects', 'paused'];
 // 'welcome',
 var credits = 100;
 var level = 1;
-var wave = 15;
+var wave = 0;
 var waveMax = 15;
 var currentPageIndex = 0;
 var mapWidth = 10;
@@ -125,7 +125,7 @@ var display_Wave = function(){
   // $p.innerHTML = levelText;
   
   var $p1 = document.createElement('p');
-  var waveText = "Wave: " + wave + "/" + waveMax;
+  var waveText = "Wave: " + 0 + "/" + waveMax;
   $p1.innerHTML = waveText;
   
   // $div.appendChild($p);
