@@ -14,6 +14,7 @@ var numticks = 0;
 var money = 500;
 var lives = 10;
 var wave = 0;
+var deadenemies = 0;
 
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
@@ -147,6 +148,7 @@ var checkDirection = function(enemy){
 			var elem = document.getElementById(enemy.id);
 			if(elem !=null){
 				elem.parentNode.removeChild(elem);
+				deadenemies++;
 			}
 			return "delete";
 		}
@@ -255,13 +257,14 @@ var Game = function(){
   			if(nextdir != "delete"){
   				this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
   			}else{
-  				if (i==this.enemies.length-1){
+  				if (deadenemies==this.enemies.length){
   					console.log("i:"+i);
   					console.log("wave1:"+this.wave);
   					this.wave ++;
   					console.log("wave2:"+this.wave);
   					me.initEnemies(this.wave);
   					numticks = 0;
+  					deadenemies = 0;
   					break;
   				}
   			}
