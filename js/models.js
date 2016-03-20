@@ -11,6 +11,9 @@ var previousTick=new Date().getTime();
 var ticks = 0;
 var idnum = 0;
 var numticks = 0;
+var money = 500;
+var lives = 10;
+var wave = 0;
 
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
@@ -95,9 +98,9 @@ var moveEnemy = function(enemy, passedtime, me){
 		console.log("curr:"+(new Date().getTime()));
 		*/
 		ticks ++;
-		console.log("ticks"+ticks);
 		if(ticks > 10){
 			//previousTick = new Date().getTime();
+			console.log("speed:"+enemy.speed);
 			if(enemy.direction === "UP"){
 				x -= ticks*enemy.speed;
 			}else if(enemy.direction === "DOWN"){
@@ -111,7 +114,6 @@ var moveEnemy = function(enemy, passedtime, me){
 			}
 			ticks = 0;
 		}
-		console.log("id2:"+enemy.id);
 		return {type : enemy.type, health: enemy.health, speed : enemy.speed, direction : enemy.direction, x : x, y : y, id: enemy.id, starttime: enemy.starttime};
 		
 	}
@@ -135,42 +137,42 @@ var checkDirection = function(enemy){
 			}
 		}
 		
-		
-		
 		//var tilex = Math.floor((enemy.x)/TILE_W);
 		var pos = "(" + tilex + "," + tiley + ")";
-		console.log("pos:"+pos)
-		console.dir(gameGrid.pathTiles[pos]);
-		return gameGrid.pathTiles[pos].nextDirection;
+		try{
+			return gameGrid.pathTiles[pos].nextDirection;
+		}catch(err){
+			console.log("enemy off board");
+			lives --;
+			var elem = document.getElementById(enemy.id);
+			if(elem !=null){
+				elem.parentNode.removeChild(elem);
+			}
+			return "delete";
+		}
 }
 
 // THIS AREA ADDRESSES THE GAME
 var Game = function(){
-  this.wave = 0;
-  this.money = 500;
-  this.health = 100;
   this.enemies = [];
   this.passedTime = 0;
   this.previousTick=new Date().getTime();
   this.fps = 30;
-  
-  	this.nextWave = function(){ 
-  		this.wave ++;
-  		this.initEnemies();
-	}
+  this.wave = 0;
+ 
 
 	this.initEnemies = function(wave){
-		var numenemies = 5 + 5*wave;
+		console.log("wave:"+wave);
+		var numenemies = 5;
+		this.enemies = [];
 		for(var i = 0; i < numenemies; i++){
 			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
 			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
-			var en = {type : "", health: 100, speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
-			console.dir("en:"+en.id);
+			var en = {type : "", health: 100+(25*wave), speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
 			idnum ++;
     		this.enemies.push(en);
 		}
-		console.log("enemies:"+this.enemies);
 	}
 
 	this.spendCredits = function(spent){
@@ -194,38 +196,39 @@ var Game = function(){
 	
 	this.drawEnemies = function(){
 		for( var enemy in this.enemies){
-			var myElem = document.getElementById(this.enemies[enemy].id);
-			console.log("id"+this.enemies[enemy].id);
-			if (myElem === null){
-				var newTowerDiv = document.createElement("div");
-				newTowerDiv.setAttribute("id",this.enemies[enemy].id);
-				newTowerDiv.setAttribute("class","mapzone"); 
-				newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
-				newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
-				//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
-				if(this.enemies[enemy].direction === "DOWN"){
-					newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
-				}else if(this.enemies[enemy].direction === "UP"){
-					newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
-				}else if(this.enemies[enemy].direction === "RIGHT"){
-					newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
-				}else if(this.enemies[enemy].direction === "LEFT"){
-					newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
-				}
-				newTowerDiv.style.backgroundRepeat = "no-repeat";
-				newTowerDiv.style.backgroundPosition = "center";
-				document.body.appendChild(newTowerDiv);
-			}else{
-				myElem.style.left= this.enemies[enemy].y+200;
-				myElem.style.top = this.enemies[enemy].x+200;
-				if(this.enemies[enemy].direction === "DOWN"){
-					myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
-				}else if(this.enemies[enemy].direction === "UP"){
-					myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
-				}else if(this.enemies[enemy].direction === "RIGHT"){
-					myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
-				}else if(this.enemies[enemy].direction === "LEFT"){
-					myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+			if(this.enemies[enemy].direction != "delete"){
+				var myElem = document.getElementById(this.enemies[enemy].id);
+				if (myElem === null){
+					var newTowerDiv = document.createElement("div");
+					newTowerDiv.setAttribute("id",this.enemies[enemy].id);
+					newTowerDiv.setAttribute("class","mapzone"); 
+					newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
+					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
+					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
+					if(this.enemies[enemy].direction === "DOWN"){
+						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+					}else if(this.enemies[enemy].direction === "UP"){
+						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+					}else if(this.enemies[enemy].direction === "RIGHT"){
+						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+					}else if(this.enemies[enemy].direction === "LEFT"){
+						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+					}
+					newTowerDiv.style.backgroundRepeat = "no-repeat";
+					newTowerDiv.style.backgroundPosition = "center";
+					document.body.appendChild(newTowerDiv);
+				}else{
+					myElem.style.left= this.enemies[enemy].y+200;
+					myElem.style.top = this.enemies[enemy].x+200;
+					if(this.enemies[enemy].direction === "DOWN"){
+						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+					}else if(this.enemies[enemy].direction === "UP"){
+						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+					}else if(this.enemies[enemy].direction === "RIGHT"){
+						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+					}else if(this.enemies[enemy].direction === "LEFT"){
+						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+					}
 				}
 			}
 		}
@@ -242,14 +245,26 @@ var Game = function(){
 		return this;
 	}
 
-	this.moveEnemies = function(){
+	this.moveEnemies = function(me){
 		numticks++;
-		if (numticks>400) numticks =400;
-		for (var i= 0; i< this.enemies.length-4+Math.floor(numticks/100); i++){
+		if (numticks>(this.enemies.length-1)*100) numticks =(this.enemies.length-1)*100;
+		for (var i= 0; i< 1+Math.floor(numticks/100); i++){
   		//for (var enemy in this.enemies){
-  			console.log("enemys:"+this.enemies[i]);
-  			this.enemies[i].direction = checkDirection(this.enemies[i]);
-  			this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
+  			var nextdir = checkDirection(this.enemies[i]);
+  			this.enemies[i].direction =nextdir;
+  			if(nextdir != "delete"){
+  				this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
+  			}else{
+  				if (i==this.enemies.length-1){
+  					console.log("i:"+i);
+  					console.log("wave1:"+this.wave);
+  					this.wave ++;
+  					console.log("wave2:"+this.wave);
+  					me.initEnemies(this.wave);
+  					numticks = 0;
+  					break;
+  				}
+  			}
   			//this.enemies[enemy] = checkDirection(this.enemies[enemy]);
   			//this.enemies[enemy].checkDirection();
   			//this.enemies[enemy].move(this.passedTime);
@@ -432,7 +447,7 @@ var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 //gameGrid.markTileDirections();
 var newGame = new Game();
-newGame.initEnemies(0);
+newGame.initEnemies(wave);
 //newGame.run();
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me) }, 1000 / newGame.fps);
