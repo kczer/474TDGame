@@ -6,7 +6,7 @@ var fastTower = $('#fastTurret');
 var goldTower = $('#goldTurret');
 var towerChosen = false;
 var clickedTile;
-var lastClickedTile = 'Thrower'; //this will be set when you click the toolbar so it knows what kind of tower to place
+var clickedTower;
 var previousTick=new Date().getTime();
 var ticks = 0;
 var idnum = 0;
@@ -101,7 +101,7 @@ var moveEnemy = function(enemy, passedtime, me){
 		ticks ++;
 		if(ticks > 10){
 			//previousTick = new Date().getTime();
-			console.log("speed:"+enemy.speed);
+			//console.log("speed:"+enemy.speed);
 			if(enemy.direction === "UP"){
 				x -= ticks*enemy.speed;
 			}else if(enemy.direction === "DOWN"){
@@ -180,6 +180,15 @@ var Game = function(){
     		
 		}
 	}
+	
+	this.displayCredits = function(){
+  		var $div = document.getElementById("creditDisplay");
+  		$div.innerHTML = '';
+  		var $p = document.createElement('p');
+  		var text = "Credits: " + money;
+  		$p.innerHTML = text;
+  		$div.appendChild($p);
+	}
 
 	this.spendCredits = function(spent){
   		this.credits -= spent;  
@@ -241,7 +250,7 @@ var Game = function(){
 	}
 
 	this.tick = function(me){
-		console.log("tick");
+		//console.log("tick");
 		me.moveEnemies(me);
 		me.shootTowers();
 		me.drawEnemies();
@@ -306,7 +315,7 @@ var towerPlaceLogic = function(){
 		gameGrid.towers[clickedTile] = newTowerObj; 
 		console.log(gameGrid.towers[clickedTile]); //array of tower objects indexed at location on grid
 		gameGrid.grid[clickedTile].hasTower = true;
-		gameGrid.grid[clickedTile].towerType = lastClickedTile;
+		gameGrid.grid[clickedTile].towerType = clickedTower;
 		console.log(gameGrid.grid[clickedTile]); //updated grid tile to reflect having tower 
 		turnCursorOff();
 		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
@@ -331,7 +340,7 @@ var towerPlaceLogic = function(){
 		gameGrid.towers[clickedTile] = newTowerObj; 
 		console.log(gameGrid.towers[clickedTile]); //array of tower objects indexed at location on grid
 		gameGrid.grid[clickedTile].hasTower = true;
-		gameGrid.grid[clickedTile].towerType = lastClickedTile;
+		gameGrid.grid[clickedTile].towerType = clickedTower;
 		console.log(gameGrid.grid[clickedTile]); //updated grid tile to reflect having tower 
 		turnCursorOff();
 		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
@@ -414,7 +423,7 @@ var Grid = function(mapHeight,mapWidth) {
 var turnCursorOn = function(e){
 	
 	//Shit that I added
-	var clickedTower = this.id;
+	clickedTower = this.id;
 	$("body").addClass(clickedTower);
 	$("body").addClass("cursor_change");
 	regularTower.off("click", turnCursorOn);

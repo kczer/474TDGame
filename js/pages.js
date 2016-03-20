@@ -59,6 +59,7 @@ var showPlayGame = function(){
     document.getElementById("fastTurret").classList.remove('hidden');
     document.getElementById("goldTurret").classList.remove('hidden');
     showGrid(mapWidth,mapHeight);
+    console.log("This works: " + gameGrid.grid["(0,0)"]);
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
