@@ -419,7 +419,7 @@ var Game = function(){
 			console.log("got here");
 			if(degrees>22.5&&degrees<77.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
 				}
@@ -427,11 +427,11 @@ var Game = function(){
 				if(enemy.y<tower.y*TILE_H){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_7.png')";
 				}else{
-					myElem.style.backgroundImage = "url('/slowturret/60/sprite_3.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_3.png')";
 				}
 			}else if(degrees>112.5&&degrees<157.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
 				}
@@ -653,13 +653,13 @@ slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
 goldTower.on("click", turnCursorOn);
 
+
+//GAME START FUNCTIONS
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
-//gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.displayCredits();
 newGame.initEnemies(wave);
-//newGame.run();
-//fieldNameElement.innerHTML = "My new text!";
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
+//END GAME START FUNCTIONS
