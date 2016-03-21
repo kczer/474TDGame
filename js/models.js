@@ -254,7 +254,7 @@ var Game = function(){
 	this.tick = function(me){
 		//console.log("tick");
 		me.moveEnemies(me);
-		me.shootTowers();
+		//me.shootTowers();
 		me.drawEnemies();
 	}
 	
@@ -267,7 +267,12 @@ var Game = function(){
 		if (numticks>(this.enemies.length-1)*100) numticks =(this.enemies.length-1)*100;
 		for (var i= 0; i< 1+Math.floor(numticks/100); i++){
   		//for (var enemy in this.enemies){
-  			var nextdir = checkDirection(this.enemies[i]);
+  			var nextdir = "";
+  			if(this.enemies[i].direction !="delete"){
+  				nextdir = checkDirection(this.enemies[i]);
+  			}else{
+  				nextdir = "delete";
+  			}
   			this.enemies[i].direction =nextdir;
   			if(nextdir != "delete"){
   				this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
@@ -288,8 +293,18 @@ var Game = function(){
 	}
 	
 
-	this.shootTowers = function(){
-  		//TODO when map is solidified
+	this.shootTowers = function(grid){
+  		for (var tower in grid.towers){
+  			for (var enemy in this.enemies){
+  				var distance = Math.sqrt(Math.pow(this.enemies[enemy].x-grid.towers[tower].x,2)+Math.pow(this.enemies[enemy].y-grid.towers[tower].y,2));
+  				if(distance<tower.range){
+  					this.enemies[enemy].health -= grid.towers[tower].damage;
+  					if(this.enemies[enemy].health< 0){
+  						this.enemies[enemy].nextDirection= "delete";
+  					}
+  				}
+  			}
+  		}
 	}
 	
 }
