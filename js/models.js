@@ -296,29 +296,36 @@ var Game = function(){
 
 	this.shootTowers = function(grid){
 		towerticks++;
-		if(towerticks==10){
+		if(towerticks==100){
 			towerticks = 0;
   			for (var tower in grid.towers){
-  				for (var enemy in this.enemies){
-  					var distance = Math.sqrt(Math.pow(this.enemies[enemy].x-(grid.towers[tower].x*TILE_W),2)+Math.pow(this.enemies[enemy].y-(grid.towers[tower].y*TILE_W),2));
-  					console.log("enemy x,y:"+this.enemies[enemy].x+","+this.enemies[enemy].y)
+  				//for (var enemy in this.enemies){
+  				for(var i = 0; i<this.enemies.length; i++){
+  					var distance = Math.sqrt(Math.pow(this.enemies[i].x-(grid.towers[tower].x*TILE_W),2)+Math.pow(this.enemies[i].y-(grid.towers[tower].y*TILE_W),2));
+  					console.log("enemy x,y:"+this.enemies[i].x+","+this.enemies[i].y)
   					console.log("tower x,y"+(grid.towers[tower].x*TILE_W)+","+(grid.towers[tower].y*TILE_W))
   					console.log("dis:"+distance);
-  					if(distance<150){
+  					if(distance<150&&this.enemies[i].direction!="delete"){
   						//this.enemies[enemy].health -= grid.towers[tower].damage;
-  						this.enemies[enemy].health -=100;
-  						if(this.enemies[enemy].health<= 0){
-  							this.enemies[enemy].direction= "delete";
-							var elem = document.getElementById(this.enemies[enemy].id);
+  						this.enemies[i].health -=100;
+  						this.setTowerGif(grid.towers[tower], this.enemies[i]);
+  						if(this.enemies[i].health<= 0){
+  							this.enemies[i].direction= "delete";
+							var elem = document.getElementById(this.enemies[i].id);
 							if(elem !=null){
 								elem.parentNode.removeChild(elem);
 								deadenemies++;
 							}
   						}
+  						i = this.enemies.length;
   					}
   				}
   			}
 		}
+	}
+	
+	this.setTowerGif = function(tower, enemy){
+		
 	}
 	
 }
