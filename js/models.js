@@ -17,6 +17,11 @@ var wave = 0;
 var deadenemies = 0;
 var towerticks = 0;
 
+var regTowerObj = new Tower("tower",10,10,15,100,10,10,10);
+var slowTowerObj = new Tower("slowTurret",5,15,7,75,10,10,10);
+var fastTowerObj = new Tower("fastTurret",15,7,10,125,10,10,10);
+var goldTowerObj = new Tower("goldTurret",20,20,10,200,10,10,10);
+
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
 
@@ -354,11 +359,28 @@ var Game = function(){
 }
 
 
+var whichTowerObj = function(type,x,y){
+if(type == "tower"){
+	var newTowerObj = new Tower(type,regTowerObj.fireRate,regTowerObj.damage,regTowerObj.range,regTowerObj.cost,x,y);
+	return newTowerObj;
+}
+else if(type == "slowTurret"){
+	var newTowerObj = new Tower(type,slowTowerObj.fireRate,slowTowerObj.damage,slowTowerObj.range,slowTowerObj.cost,x,y);
+	return newTowerObj;
+}
+else if(type == "fastTurret"){
+	var newTowerObj = new Tower(type,fastTowerObj.fireRate,fastTowerObj.damage,fastTowerObj.range,fastTowerObj.cost,x,y);
+	return newTowerObj;
+}
+else if(type == "goldTurret"){
+	var newTowerObj = new Tower(type,goldTowerObj.fireRate,goldTowerObj.damage,goldTowerObj.range,goldTowerObj.cost,x,y);
+	return newTowerObj;
+}
+}
 
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
 	console.log(clickedTile);
-  		event.stopPropagation();
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
 	turnCursorOff();
@@ -366,7 +388,7 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20,gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY,(clickedTile + "_T")); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
@@ -391,7 +413,7 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20, gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY, (clickedTile + "_T")); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
