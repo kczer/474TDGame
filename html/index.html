@@ -7,8 +7,6 @@
 
 <title>Apple vs FBI</title>
 
-<style type="text/css"></style>
-
 
 </head>
 
@@ -36,49 +34,68 @@
         <button id="insMainMenu" type="button">Main Menu</button>
     </div>
     
-    <div id="gameObjects" class = "hidden" >
-        <div id="topBar" class = "bar hidden">
-            <div id="creditDisplay" class = "creditPlace"></div>
-            <div id="lastWaveDisplay" class = "wavePlace"></div>
-            <div id="levelWaveDisplay" class = "levelInfo"></div>
-        </div>
-        <!--<div id ="game" class= "gameScreen"></div>-->
-        
-        <div id="game"class = "gScreen"></div>
-        
-        <div id="bottomBar" class = "bar">
-            <div id="towerSelection" class ="towerDisplay"></div>
-            <div id = "mainReturn" class = "levelInfo">
-                <button id="pause" type="button">Pause</button>
-                <button id="quit" type="button">Quit</button>
-                
+    <div id="container">
+    
+        <div id="gameObjects" class = "hidden" >
+            <div id="topBar">
+                <div id="creditDisplay" class = "creditPlace"></div>
+                <div id="lastWaveDisplay" class = "wavePlace"></div>
+                <div id="levelWaveDisplay" class = "levelInfo"></div>
             </div>
-        </div>
-    </div>
+            <!--<div id ="game" class= "gameScreen"></div>-->
+            
+            <div id="truckpath">
+                <div id="truck"></div>
+            </div>
+            
+            <div id="game"></div>
+            
+            <div id="hqwrap">
+                <div id="hq"></div>
+            </div>
+            
+            <div id="bottomBar" class = "bar">
+                <div id="towerSelection" class ="towerDisplay"></div>
+                <div id = "mainReturn" class = "levelInfo">
+                    <button id="pause" type="button">Pause</button>
+                    <button id="quit" type="button">Quit</button>
+                    
+                </div>
+                
+                <div id = "paused" class = "hidden">
+                    <h1>Pause</h1>
+                    <button id="resume" type="button">Resume</button>
+                    <button id="pauseQuit" type="button">Quit</button>
+                </div>
+    
+                <ul id="towerbar">
+                    <li id="tower" class ="hidden towericon"></li>
+                    <li id="slowTurret" class="hidden towericon"></li>
+                    <li id="fastTurret" class="hidden towericon"></li>        
+                    <li id="goldTurret" class="hidden towericon"></li>  
+                </ul>
+                
+                
+                
+            </div><!-- bottomBar -->
+        </div> <!-- gameObjects -->
+    
+    </div><!-- container -->
         
-    <div id = "paused" class = "hidden">
-        <h1>Pause</h1>
-        <button id="resume" type="button">Resume</button>
-        <button id="pauseQuit" type="button">Quit</button>
-    </div>
-
-        
-    <div id="tower" class ="hidden"></div>
-    <div id="slowTurret" class="hidden"></div>
-    <div id="fastTurret" class="hidden"></div>        
-    <div id="goldTurret" class="hidden"></div>
+ <footer></footer>
 
 
-    <div id="bg" class = "hidden">
+    <div id="bg" class"hidden">
         <img src="/img/HQ150.png"/>
         <img src="/img/movingtruck.gif"/>
+    
     </div>
     
 </body>
 
 
 <script src = "/js/models.js"></script>
-<!-- <script src = "/js/brienemy.js"></script> -->
+<script src = "/js/brienemy.js"></script>
 <script src = "/js/britower.js"></script>
 <script src = "/js/pages.js"></script>
 

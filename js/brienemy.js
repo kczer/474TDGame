@@ -20,6 +20,7 @@ $(document).ready(function(){
             $afrank.css("top ", self.posy+"px");
             $afrank.css("height", "60px");
             $afrank.css("width", "60px");
+            $afrank.attr("class","damage");
             
             if (self.type == "basic"){
                 $afrank.attr("class","down");

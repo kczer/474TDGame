@@ -8,25 +8,48 @@ html{
     background-color: aquamarine;
 }
 
-#tower{
+#topbar{
+    z-index:5;
+}
+
+#levelWaveDisplay p{
+    margin:0;  
+}
+
+#container{
+    width:100%;
+    height:100%;
+    margin: 0 auto;
+}
+#towerbar{
+    position:absolute;
+    left: 10px;
+    margin-top:20px;
+    
+}
+
+#towerbar li{
+    display:inline-block;
+    float:right;
+    margin-right: 10px; 
     height:60px;
-    width:60px;    
+    width:60px;
+    border:solid 2px white;
+    border-radius: 5px;
 }
 
-#slowturret{
-    height: 60px;
-    width: 60px;
+#towerbar li:hover{
+
+    border:solid 2px #666;
+    transition: 0.75s ease;
+    
 }
 
-#goldturret{
-    height: 60px;
-    width: 60px;
+#tower{
+    background-image: url("/img/turret/sprite_1.png");
+    background-repeat: no-repeat;
 }
 
-#fastturret{
-    height: 60px;
-    width: 60px;
-}
 
 body{
         background-color:black;
@@ -44,6 +67,7 @@ div{
   width: 99%;
   height: 70px;
   margin-bottom:50px;
+  
 }
 
 #home button{
@@ -79,7 +103,7 @@ h1{
 
 @keyframes glow {
     to {
-        text-shadow: 1px 1px 15px #666;
+        text-shadow: 1px 1px 15px #c0c0c0;
     }
 }
 
@@ -102,6 +126,9 @@ h1{
 }
 
 /* foe */
+.damage{
+    filter: brightness(0) invert(1);
+}
 
 .left{
     height:160px;
@@ -234,25 +261,25 @@ h1{
 .sts1{
     background-image: url('/slowturret/sprite_1.png');
 }
-.sts1{
+.sts2{
     background-image: url('/slowturret/sprite_2.png');
 }
-.sts1{
+.sts3{
     background-image: url('/slowturret/sprite_3.png');
 }
-.sts1{
+.sts4{
     background-image: url('/slowturret/sprite_4.png');
 }
-.sts1{
+.sts5{
     background-image: url('/slowturret/sprite_5.png');
 }
-.sts1{
+.sts6{
     background-image: url('/slowturret/sprite_6.png');
 }
-.sts1{
+.sts7{
     background-image: url('/slowturret/sprite_7.png');
 }
-.sts1{
+.sts8{
     background-image: url('/slowturret/sprite_8.png');
 }
 
@@ -313,30 +340,67 @@ h1{
     height:75px;
 }
 
-.bar{
-    width:700px;
+
+#bottomBar{
+    float:left;
+    width:90%;
     height:50px;
     display:inline-block;
+    
+}
+#truckpath{
+    position: relative;
+    height:100px;
+    width:8%;
+    float:left;
+    animation: truck 5s;
+    animation-fill-mode: forwards;
+}
+#truck{
+    float:right;
+    bottom:0px;
+    height:89px;
+    width:62px;
+    background-image: url("/img/movingtruck.gif");
+    z-index:1;
 }
 
-.gameScreen{
-    width:600px;
-    height:600px;
-    background-color: navy;
+@keyframes truck {
+    from {
+        top: 700px;
+    }
+    to {
+        top: -200px;
+ 
+    }
+}
+
+
+#game{
+    position: relative;
+    margin: 0 auto;
+    width:70%;
+    height:90%;
+    float:left;
+    
     display:block;
     border-radius: 5px;
+}
+#hqwrap{
+    height:100%;
+    width:10%;
+    float:right;
     
 }
 
-.gScreen{
-    width:400px;
-    height:400px;
-    /*background-color: blue;*/
-    display:block;
+#hq{
+    position: relative;
+    background-image: url("/img/HQ150.png");
+    height:126px;
+    width:150px;
+    top:300px;
 }
 
-/*.leftPlace{*/
-/*}*/
-
-/*.rightPlace{*/
-/*}*/
+footer{
+    height:50px;
+}

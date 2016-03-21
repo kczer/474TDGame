@@ -1,9 +1,9 @@
+*{
+    border:dotted 1px white;
+}
+
 .hidden {
     display: none;
-}
-#tower {
-    background-image: url("/img/turret/sprite_1.png");
-    background-repeat: no-repeat;
 }
 
 #slowTurret{
