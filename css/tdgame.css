@@ -23,24 +23,22 @@
 }
 
 
-/* This will make the cursor appear as the image of the regular tower, unfortunately it breaks tower placement for some reason */
-/*
+
 .tower.cursor_change {
     cursor: url('/img/turret/sprite_1.png'), crosshair;
 }
 
-.fastturret.cursor_change {
-    cursor: url('/img/fastturret/sprite_1.png');
+.fastTurret.cursor_change {
+    cursor: url('/img/fastturret/sprite_1.png'), crosshair;
 }
 
-.slowturret.cursor_change {
-    cursor: url('/img/slowturret/60/sprite_5.png');
+.slowTurret.cursor_change {
+    cursor: url('/img/slowturret/60/sprite_5.png'), crosshair;
 }
 
-.goldturret.cursor_change {
-    cursor: url('/img/goldturret/sprite_1.png');
+.goldTurret.cursor_change {
+    cursor: url('/img/goldturret/sprite_1.png'), crosshair;
 }
-*/
 
 .mapzone
 {
