@@ -55,7 +55,7 @@ $(document).ready(function(){
     setTimeout(kill,950); //1025
     
     
-//execute
+/*execute
 var tower1 = new Tower("basic", 10, 30);   
     tower1.drawTower();
 
@@ -67,6 +67,6 @@ var tower3 = new Tower("fast", 30, 10);
     
 var tower4 = new Tower("slow", 110, 20);
     tower4.drawTower(); 
-    
+  */  
 });
 
