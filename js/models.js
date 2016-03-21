@@ -324,29 +324,114 @@ var Game = function(){
 	}
 	
 	this.setTowerGif = function(tower, enemy){
-		var offsety = tower.y-enemy.y;
-		var offsetx = tower.x-enemy.x;
-		var degrees = Math.atan2(offsety,-offsetx);
+		var offsety = enemy.y-tower.y*TILE_H;
+		var offsetx = enemy.x-tower.x*TILE_W;
+		var degrees = Math.atan2(offsety,-offsetx)*(180/Math.PI);
+		if(degrees<0) degrees = 360-degrees;
+		if(degrees>360) degrees = degrees%360;
 		var myElem = document.getElementById(tower.id);
 		console.log("tname:"+tower.name);
 		console.log("degrees:"+degrees);
-		if(tower.name =="tower"){
+		var increment = 180/16;
+		if(tower.name =="fastTurret"){
+			console.log("got here");
 			if(degrees>22.5&&degrees<77.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_6.gif')";
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_4.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_6.png')";
+				}
 			}else if(degrees>77.5&&degrees<112.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_7.gif')";
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_3.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_7.png')";
+				}
 			}else if(degrees>112.5&&degrees<157.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_8.gif')";
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_2.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/fastturret/sprite_8.png')";
+				}
 			}else if(degrees>157.5&&degrees<202.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_1.gif')";
-			}else if(degrees>202.5&&degrees<247.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_2.gif')";
-			}else if(degrees>247.5&&degrees<292.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_3.gif')";
-			}else if(degrees>292.5&&degrees<337.5){
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_4.gif')";
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_1.png')";
 			}else{
-				myElem.style.backgroundImage = "url('/img/fastturret/sprite_5.gif')";
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_5.png')";
+			}
+		}else if(tower.name =="tower"){
+			console.log("got here");
+			if(degrees>22.5&&degrees<77.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/turret/sprite_6.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/turret/sprite_4.png')";
+				}
+			}else if(degrees>77.5&&degrees<112.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/turret/sprite_7.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/turret/sprite_3.png')";
+				}
+			}else if(degrees>112.5&&degrees<157.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/turret/sprite_8.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/turret/sprite_2.png')";
+				}
+			}else if(degrees>157.5&&degrees<202.5){
+				myElem.style.backgroundImage = "url('/img/turret/sprite_1.png')";
+			}else{
+				myElem.style.backgroundImage = "url('/img/turret/sprite_5.png')";
+			}
+		}else if(tower.name =="goldTurret"){
+			console.log("got here");
+			if(degrees>22.5&&degrees<77.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_6.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_4.png')";
+				}
+			}else if(degrees>77.5&&degrees<112.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_7.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_3.png')";
+				}
+			}else if(degrees>112.5&&degrees<157.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_8.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/goldturret/sprite_2.png')";
+				}
+			}else if(degrees>157.5&&degrees<202.5){
+				myElem.style.backgroundImage = "url('/img/goldturret/sprite_1.png')";
+			}else{
+				myElem.style.backgroundImage = "url('/img/goldturret/sprite_5.png')";
+			}
+		}else if(tower.name =="slowTurret"){
+			console.log("got here");
+			if(degrees>22.5&&degrees<77.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
+				}
+			}else if(degrees>77.5&&degrees<112.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_7.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/slowturret/60/sprite_3.png')";
+				}
+			}else if(degrees>112.5&&degrees<157.5){
+				if(enemy.y<tower.y*TILE_H){
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
+				}else{
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
+				}
+			}else if(degrees>157.5&&degrees<202.5){
+				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_1.png')";
+			}else{
+				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_5.png')";
 			}
 		}
 	}
