@@ -427,7 +427,7 @@ var Game = function(){
 				if(enemy.y<tower.y*TILE_H){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_7.png')";
 				}else{
-					myElem.style.backgroundImage = "url('/slowturret/60/sprite_3.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_3.png')";
 				}
 			}else if(degrees>112.5&&degrees<157.5){
 				if(enemy.y<tower.y*TILE_H){
