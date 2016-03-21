@@ -117,7 +117,7 @@ $(document).ready(function(){
     }
     
     
-//execute
+/*execute
 var frank1 = new Frank("basic", 200,100);   
     frank1.drawFrank();
     frank1.moveFrank(); 
@@ -125,5 +125,5 @@ var frank1 = new Frank("basic", 200,100);
 var frank2 = new Frank("advanced", 300, 200);
     frank2.drawFrank();
     frank2.moveFrank(); 
-
+*/
 });

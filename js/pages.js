@@ -49,7 +49,6 @@ var showPlayGame = function(){
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
 
     // document.getElementById("tower").classList.remove('hidden');
-    showGrid();
     display_Wave();
     display_last_Wave();
     //display_Towers();

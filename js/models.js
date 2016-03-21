@@ -465,10 +465,24 @@ else if(type == "goldTurret"){
 }
 }
 
+var whichTowerBgImg = function(type){
+if(type == "tower"){
+	return "url('/img/turret/sprite_1.png')";
+}
+else if(type == "slowTurret"){
+	return "url('/img/slowturret/60/sprite_5.png')";
+}
+else if(type == "fastTurret"){
+	return "url('/img/fastturret/sprite_1.png')";
+}
+else if(type == "goldTurret"){
+	return "url('/img/goldturret/sprite_1.png')";
+}
+}
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
 	console.log(clickedTile);
-	var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
+	var newTowerObj = whichTowerObj(clickedTower,gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if(newTowerObj.cost > money){
 	turnCursorOff();
@@ -491,7 +505,7 @@ var towerPlaceLogic = function(){
 		gameGrid.grid[clickedTile].towerType = clickedTower;
 		console.log(gameGrid.grid[clickedTile]); //updated grid tile to reflect having tower 
 		turnCursorOff();
-		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
+		newTowerDiv.style.backgroundImage = whichTowerBgImg(clickedTower);
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
