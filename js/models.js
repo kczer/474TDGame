@@ -650,13 +650,13 @@ slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
 goldTower.on("click", turnCursorOn);
 
+
+//GAME START FUNCTIONS
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
-//gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.displayCredits();
 newGame.initEnemies(wave);
-//newGame.run();
-//fieldNameElement.innerHTML = "My new text!";
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
+//END GAME START FUNCTIONS
