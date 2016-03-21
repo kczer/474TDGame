@@ -383,11 +383,15 @@ var towerPlaceLogic = function(){
 	console.log(clickedTile);
 	var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
-	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
+	if(newTowerObj.cost > money){
+	turnCursorOff();
+	alert("Sorry you don't have enough money");
+	}
+	else if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change") && (newTowerObj.cost <= money)){
 	turnCursorOff();
 	alert("Sorry there is a tower there");
 	}
-	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change")){
+	else if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change") && (newTowerObj.cost <= money)){
 		var newTowerDiv = document.createElement("div");
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerObj.id = newTowerDiv.getAttribute("id");
@@ -405,14 +409,20 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
 		document.body.appendChild(newTowerDiv);
+		money -= newTowerObj.cost;
+		newGame.displayCredits();
 	}
 	}
-	if(gameGrid.grid[clickedTile.substring(0,6)]){
-	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
+	else if(gameGrid.grid[clickedTile.substring(0,6)]){
+	if(newTowerObj.cost > money){
+	turnCursorOff();
+	alert("Sorry you don't have enough money");
+	}
+	else if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change") && (newTowerObj.cost <= money)){
 	turnCursorOff();
 	alert("Sorry there is a tower there");
 	}
-	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change")){
+	else if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change") && (newTowerObj.cost <= money)){
 		var newTowerDiv = document.createElement("div");
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerObj.id = newTowerDiv.getAttribute("id");
@@ -430,6 +440,8 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
 		document.body.appendChild(newTowerDiv);
+		money -= newTowerObj.cost;
+		newGame.displayCredits();
 	}
 	}
 }
