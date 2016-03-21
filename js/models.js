@@ -325,7 +325,31 @@ var Game = function(){
 	}
 	
 	this.setTowerGif = function(tower, enemy){
-		
+		var offsety = tower.y-enemy.y;
+		var offsetx = tower.x-enemy.x;
+		var degrees = Math.atan2(offsety,-offsetx);
+		var myElem = document.getElementById(tower.id);
+		console.log("tname:"+tower.name);
+		console.log("degrees:"+degrees);
+		if(tower.name =="tower"){
+			if(degrees>22.5&&degrees<77.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_6.gif')";
+			}else if(degrees>77.5&&degrees<112.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_7.gif')";
+			}else if(degrees>112.5&&degrees<157.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_8.gif')";
+			}else if(degrees>157.5&&degrees<202.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_1.gif')";
+			}else if(degrees>202.5&&degrees<247.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_2.gif')";
+			}else if(degrees>247.5&&degrees<292.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_3.gif')";
+			}else if(degrees>292.5&&degrees<337.5){
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_4.gif')";
+			}else{
+				myElem.style.backgroundImage = "url('/img/fastturret/sprite_5.gif')";
+			}
+		}
 	}
 	
 }
