@@ -221,13 +221,14 @@ var Game = function(){
 					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
 					if(this.enemies[enemy].direction === "DOWN"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+						//newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 					}else if(this.enemies[enemy].direction === "UP"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/backwalk.gif')";
 					}else if(this.enemies[enemy].direction === "RIGHT"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/rightwalk.gif')";
 					}else if(this.enemies[enemy].direction === "LEFT"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/leftwalk.gif')";
 					}
 					newTowerDiv.style.backgroundRepeat = "no-repeat";
 					newTowerDiv.style.backgroundPosition = "center";
@@ -236,13 +237,13 @@ var Game = function(){
 					myElem.style.left= this.enemies[enemy].y+200;
 					myElem.style.top = this.enemies[enemy].x+200;
 					if(this.enemies[enemy].direction === "DOWN"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 					}else if(this.enemies[enemy].direction === "UP"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/backwalk.gif')";
 					}else if(this.enemies[enemy].direction === "RIGHT"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/rightwalk.gif')";
 					}else if(this.enemies[enemy].direction === "LEFT"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/leftwalk.gif')";
 					}
 				}
 			}
@@ -252,7 +253,7 @@ var Game = function(){
 	this.tick = function(me){
 		//console.log("tick");
 		me.moveEnemies(me);
-		me.shootTowers();
+		//me.shootTowers();
 		me.drawEnemies();
 	}
 	
@@ -265,7 +266,12 @@ var Game = function(){
 		if (numticks>(this.enemies.length-1)*100) numticks =(this.enemies.length-1)*100;
 		for (var i= 0; i< 1+Math.floor(numticks/100); i++){
   		//for (var enemy in this.enemies){
-  			var nextdir = checkDirection(this.enemies[i]);
+  			var nextdir = "";
+  			if(this.enemies[i].direction !="delete"){
+  				nextdir = checkDirection(this.enemies[i]);
+  			}else{
+  				nextdir = "delete";
+  			}
   			this.enemies[i].direction =nextdir;
   			if(nextdir != "delete"){
   				this.enemies[i] = moveEnemy(this.enemies[i], this.passedTime );
@@ -286,8 +292,18 @@ var Game = function(){
 	}
 	
 
-	this.shootTowers = function(){
-  		//TODO when map is solidified
+	this.shootTowers = function(grid){
+  		for (var tower in grid.towers){
+  			for (var enemy in this.enemies){
+  				var distance = Math.sqrt(Math.pow(this.enemies[enemy].x-grid.towers[tower].x,2)+Math.pow(this.enemies[enemy].y-grid.towers[tower].y,2));
+  				if(distance<tower.range){
+  					this.enemies[enemy].health -= grid.towers[tower].damage;
+  					if(this.enemies[enemy].health< 0){
+  						this.enemies[enemy].nextDirection= "delete";
+  					}
+  				}
+  			}
+  		}
 	}
 	
 }
