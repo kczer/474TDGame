@@ -319,6 +319,8 @@ var Game = function(){
 							if(elem !=null){
 								elem.parentNode.removeChild(elem);
 								deadenemies++;
+								money+=25;
+								newGame.displayCredits();
 							}
   						}
   						i = this.enemies.length;
