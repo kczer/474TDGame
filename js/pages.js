@@ -1,6 +1,6 @@
 var pages = ['home', 'instruction','gameObjects', 'paused'];
 // 'welcome',
-var credits = 100;
+// var credits = 100;
 var level = 1;
 var wave = 0;
 var waveMax = 15;
@@ -50,7 +50,6 @@ var showPlayGame = function(){
 
     // document.getElementById("tower").classList.remove('hidden');
     showGrid();
-    display_Credits();
     display_Wave();
     display_last_Wave();
     //display_Towers();
@@ -59,7 +58,6 @@ var showPlayGame = function(){
     document.getElementById("fastTurret").classList.remove('hidden');
     document.getElementById("goldTurret").classList.remove('hidden');
     showGrid(mapWidth,mapHeight);
-    console.log("This works: " + gameGrid.grid["(0,0)"]);
     // document.getElementById("tower").classList.remove('hidden');
     //document.getElementById(pages[currentPageIndex]).classList.remove('hidden'); 
 };
@@ -72,7 +70,6 @@ var pauseGame = function(){
     currentPageIndex = 3;
     document.getElementById(pages[oldIndex]).classList.add('hidden');
     document.getElementById(pages[currentPageIndex]).classList.remove('hidden');
-    // display_Credits();
     // display_LevelWave();
     hideGrid(mapWidth,mapHeight);
     document.getElementById("tower").classList.add('hidden');
@@ -96,16 +93,6 @@ var display_Welcome_Screen = function(){
   //   $h1.innerHTML = text;
   //   $div.appendChild($h1);  
 };
-
-var display_Credits = function(){
-  var $div = document.getElementById("creditDisplay");
-  $div.innerHTML = '';
-  var $p = document.createElement('p');
-  var text = "Credits: " + credits;
-  $p.innerHTML = text;
-  $div.appendChild($p);
-};
-
 
 var display_last_Wave = function(){
 var $div = document.getElementById("lastWaveDisplay");

@@ -185,11 +185,9 @@ var Game = function(){
 	
 	this.displayCredits = function(){
   		var $div = document.getElementById("creditDisplay");
-  		$div.innerHTML = '';
-  		var $p = document.createElement('p');
-  		var text = "Credits: " + money;
-  		$p.innerHTML = text;
-  		$div.appendChild($p);
+  		//console.log("This is credit display: " + $div.innerHTML);
+  		$div.innerHTML =  ("Credits: " + money);
+  		//console.log("This is credit display: " + $div.innerHTML);
 	}
 
 	this.spendCredits = function(spent){
@@ -299,8 +297,6 @@ var Game = function(){
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
 	console.log(clickedTile);
-	var tile = document.getElementById(clickedTile);
-	var clickedPositon = $( this ).offset();
   		event.stopPropagation();
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
@@ -462,6 +458,7 @@ var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 //gameGrid.markTileDirections();
 var newGame = new Game();
+newGame.displayCredits();
 newGame.initEnemies(wave);
 //newGame.run();
 //fieldNameElement.innerHTML = "My new text!";
