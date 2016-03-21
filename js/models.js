@@ -381,6 +381,7 @@ else if(type == "goldTurret"){
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
 	console.log(clickedTile);
+	var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
 	turnCursorOff();
@@ -388,8 +389,8 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
+		newTowerObj.id = newTowerDiv.getAttribute("id");
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
@@ -413,8 +414,8 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = whichTowerObj(document.getElementsByTagName("body")[0].classList.item(0),gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY);
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
+		newTowerObj.id = newTowerDiv.getAttribute("id");
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
