@@ -15,6 +15,7 @@ var money = 500;
 var lives = 10;
 var wave = 0;
 var deadenemies = 0;
+var towerticks = 0;
 
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
@@ -223,7 +224,6 @@ var Game = function(){
 					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
 					if(this.enemies[enemy].direction === "DOWN"){
-						//newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 						newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 					}else if(this.enemies[enemy].direction === "UP"){
 						newTowerDiv.style.backgroundImage = "url('/img/foe/backwalk.gif')";
@@ -252,10 +252,10 @@ var Game = function(){
 		}
 	}
 
-	this.tick = function(me){
+	this.tick = function(me, grid){
 		//console.log("tick");
 		me.moveEnemies(me);
-		//me.shootTowers();
+		me.shootTowers(grid);
 		me.drawEnemies();
 	}
 	
@@ -295,17 +295,30 @@ var Game = function(){
 	
 
 	this.shootTowers = function(grid){
-  		for (var tower in grid.towers){
-  			for (var enemy in this.enemies){
-  				var distance = Math.sqrt(Math.pow(this.enemies[enemy].x-grid.towers[tower].x,2)+Math.pow(this.enemies[enemy].y-grid.towers[tower].y,2));
-  				if(distance<tower.range){
-  					this.enemies[enemy].health -= grid.towers[tower].damage;
-  					if(this.enemies[enemy].health< 0){
-  						this.enemies[enemy].nextDirection= "delete";
+		towerticks++;
+		if(towerticks==10){
+			towerticks = 0;
+  			for (var tower in grid.towers){
+  				for (var enemy in this.enemies){
+  					var distance = Math.sqrt(Math.pow(this.enemies[enemy].x-(grid.towers[tower].x*TILE_W),2)+Math.pow(this.enemies[enemy].y-(grid.towers[tower].y*TILE_W),2));
+  					console.log("enemy x,y:"+this.enemies[enemy].x+","+this.enemies[enemy].y)
+  					console.log("tower x,y"+(grid.towers[tower].x*TILE_W)+","+(grid.towers[tower].y*TILE_W))
+  					console.log("dis:"+distance);
+  					if(distance<150){
+  						//this.enemies[enemy].health -= grid.towers[tower].damage;
+  						this.enemies[enemy].health -=100;
+  						if(this.enemies[enemy].health<= 0){
+  							this.enemies[enemy].direction= "delete";
+							var elem = document.getElementById(this.enemies[enemy].id);
+							if(elem !=null){
+								elem.parentNode.removeChild(elem);
+								deadenemies++;
+							}
+  						}
   					}
   				}
   			}
-  		}
+		}
 	}
 	
 }
@@ -482,4 +495,4 @@ newGame.initEnemies(wave);
 //newGame.run();
 //fieldNameElement.innerHTML = "My new text!";
 var me =newGame.getThis();
-setInterval(function() { newGame.tick(me) }, 1000 / newGame.fps);
+setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
