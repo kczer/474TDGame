@@ -18,10 +18,26 @@
     background-image: url("/img/goldturret/sprite_1.png");
 }
 
-
-
-.cursor_change {
+.cursor_change{
     cursor: url('http://www.placecage.com/50/50'), crosshair;
+}
+
+
+
+.tower.cursor_change {
+    cursor: url('/img/turret/sprite_1.png'), crosshair;
+}
+
+.fastTurret.cursor_change {
+    cursor: url('/img/fastturret/sprite_1.png'), crosshair;
+}
+
+.slowTurret.cursor_change {
+    cursor: url('/img/slowturret/60/sprite_5.png'), crosshair;
+}
+
+.goldTurret.cursor_change {
+    cursor: url('/img/goldturret/sprite_1.png'), crosshair;
 }
 
 .mapzone
