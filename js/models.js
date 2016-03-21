@@ -223,13 +223,14 @@ var Game = function(){
 					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
 					if(this.enemies[enemy].direction === "DOWN"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+						//newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 					}else if(this.enemies[enemy].direction === "UP"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/backwalk.gif')";
 					}else if(this.enemies[enemy].direction === "RIGHT"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/rightwalk.gif')";
 					}else if(this.enemies[enemy].direction === "LEFT"){
-						newTowerDiv.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+						newTowerDiv.style.backgroundImage = "url('/img/foe/leftwalk.gif')";
 					}
 					newTowerDiv.style.backgroundRepeat = "no-repeat";
 					newTowerDiv.style.backgroundPosition = "center";
@@ -238,13 +239,13 @@ var Game = function(){
 					myElem.style.left= this.enemies[enemy].y+200;
 					myElem.style.top = this.enemies[enemy].x+200;
 					if(this.enemies[enemy].direction === "DOWN"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/frontwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/frontwalk.gif')";
 					}else if(this.enemies[enemy].direction === "UP"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/backwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/backwalk.gif')";
 					}else if(this.enemies[enemy].direction === "RIGHT"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/rightwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/rightwalk.gif')";
 					}else if(this.enemies[enemy].direction === "LEFT"){
-						myElem.style.backgroundImage = "url('https://tdgame-rserva.c9users.io/img/foe/leftwalk.gif')";
+						myElem.style.backgroundImage = "url('/img/foe/leftwalk.gif')";
 					}
 				}
 			}
