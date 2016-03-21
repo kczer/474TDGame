@@ -419,7 +419,7 @@ var Game = function(){
 			console.log("got here");
 			if(degrees>22.5&&degrees<77.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
 				}
@@ -431,7 +431,7 @@ var Game = function(){
 				}
 			}else if(degrees>112.5&&degrees<157.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
 				}
