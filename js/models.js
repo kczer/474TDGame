@@ -436,9 +436,9 @@ var Game = function(){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
 				}
 			}else if(degrees>157.5&&degrees<202.5){
-				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_1.png')";
-			}else{
 				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_5.png')";
+			}else{
+				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_1.png')";
 			}
 		}
 	}
