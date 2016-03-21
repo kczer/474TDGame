@@ -238,7 +238,7 @@ var Game = function(){
 					}
 					newTowerDiv.style.backgroundRepeat = "no-repeat";
 					newTowerDiv.style.backgroundPosition = "center";
-					document.body.appendChild(newTowerDiv);
+					document.getElementById('gridWrap').appendChild(newTowerDiv);
 				}else{
 					myElem.style.left= this.enemies[enemy].y+200;
 					myElem.style.top = this.enemies[enemy].x+200;
@@ -509,7 +509,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
-		document.body.appendChild(newTowerDiv);
+		document.getElementById("gridWrap").appendChild(newTowerDiv);
 		money -= newTowerObj.cost;
 		newGame.displayCredits();
 	}
@@ -540,7 +540,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
-		document.body.appendChild(newTowerDiv);
+		document.getElementById("gridWrap").appendChild(newTowerDiv);
 		money -= newTowerObj.cost;
 		newGame.displayCredits();
 	}
@@ -557,6 +557,9 @@ var Grid = function(mapHeight,mapWidth) {
     // create the map zone
 	
     this.createGrid = function() {
+    var gridWrapper = document.createElement("div");
+    gridWrapper.setAttribute("id","gridWrap");
+    document.body.appendChild(gridWrapper);
 	for(var j = 0; j < mapHeight; j++)
 	{
 		for(var i = 0; i < mapWidth; i++)
@@ -569,7 +572,7 @@ var Grid = function(mapHeight,mapWidth) {
 			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 			mapzone.style.left = (TILE_H*i+200) + "px";
 			mapzone.style.top = (TILE_W*j+200) + "px";
-			document.body.appendChild(mapzone);
+			gridWrapper.appendChild(mapzone);
 			if(levelOne.indexOf(pos) > -1)
 			{
 				mapzone.style.backgroundImage = "url('/img/pathtile60.png')";
