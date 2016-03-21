@@ -31,7 +31,7 @@ var levelOne = ["(9,0)","(9,1)","(8,1)","(7,1)","(6,1)","(5,1)","(4,1)","(3,1)",
 
 // THIS FILE DEALS WITH THE CLASSES FOR THE GAME OBJECTS
 // THIS AREA ADDRESSES THE TOWER
-function Tower(name, fireRate, damage, range, cost, x, y){
+function Tower(name, fireRate, damage, range, cost, x, y, id){
     this.name = name;
     this.fireRate = fireRate;
     this.damage = damage;
@@ -39,6 +39,7 @@ function Tower(name, fireRate, damage, range, cost, x, y){
     this.range = range;
 	this.x = x;
 	this.y = y;
+	this.id = id;
 }
 
 Tower.prototype.upgrade = function(cost, fireRate, damage){
@@ -186,11 +187,9 @@ var Game = function(){
 	
 	this.displayCredits = function(){
   		var $div = document.getElementById("creditDisplay");
-  		$div.innerHTML = '';
-  		var $p = document.createElement('p');
-  		var text = "Credits: " + money;
-  		$p.innerHTML = text;
-  		$div.appendChild($p);
+  		//console.log("This is credit display: " + $div.innerHTML);
+  		$div.innerHTML =  ("Credits: " + money);
+  		//console.log("This is credit display: " + $div.innerHTML);
 	}
 
 	this.spendCredits = function(spent){
@@ -359,8 +358,6 @@ var Game = function(){
 var towerPlaceLogic = function(){
 	clickedTile = this.id;
 	console.log(clickedTile);
-	var tile = document.getElementById(clickedTile);
-	var clickedPositon = $( this ).offset();
   		event.stopPropagation();
 	if(gameGrid.grid[clickedTile.substring(0,5)]){
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == true || (gameGrid.towers[clickedTile] != null)) &&  $("body").hasClass("cursor_change")){
@@ -369,7 +366,7 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,5)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20,gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20,gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY,(clickedTile + "_T")); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
@@ -394,7 +391,7 @@ var towerPlaceLogic = function(){
 	}
 	if((gameGrid.grid[clickedTile.substring(0,6)].hasTower == false) &&  $("body").hasClass("cursor_change")){
 		var newTowerDiv = document.createElement("div");
-		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20, gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
+		var newTowerObj = new Tower(document.getElementsByTagName("body")[0].classList.item(0), 20, 20, 20, 20, gameGrid.grid[clickedTile].locationX,gameGrid.grid[clickedTile].locationY, (clickedTile + "_T")); //plan to make the class on the body, which changes cursor, have the name of the tower your trying to place, this will then cascade down for naming / determining stats of everything
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
@@ -439,7 +436,6 @@ var Grid = function(mapHeight,mapWidth) {
 			document.body.appendChild(mapzone);
 			if(levelOne.indexOf(pos) > -1)
 			{
-				mapzone.style.backgroundColor = "brown";
 				mapzone.style.backgroundImage = "url('/img/pathtile60.png')";
 				this.grid[pos] = pathTile;
 				this.pathTiles[pos] = pathTile;
@@ -447,7 +443,7 @@ var Grid = function(mapHeight,mapWidth) {
 			else
 			{
 				this.grid[pos] = nonPathTile;
-				mapzone.style.backgroundImage = "url('/img/grasstile60.png')";
+				mapzone.style.backgroundImage = "url('/img/grasstile2.png')";
 				document.getElementById(pos).addEventListener("click",towerPlaceLogic);
 			}
 		}
@@ -522,6 +518,7 @@ var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 //gameGrid.markTileDirections();
 var newGame = new Game();
+newGame.displayCredits();
 newGame.initEnemies(wave);
 //newGame.run();
 //fieldNameElement.innerHTML = "My new text!";
