@@ -219,11 +219,23 @@ var Game = function(){
   		$('#life').html("Lives: " + lives);
 	}
 
+	this.endGame = function(){
+		if (lives <= 0){
+			$('#end').css("height","150%");
+			$('#end').css("z-index","10");
+			$('#end').css("width","100%");
+			$('#end').css("background-color","black");
+			$('#end').css("color","white");
+			$('#end').html("<h1>fam.</h1>");
+			$('#end').slideDown();
+		}
+	}
+	
 
 
 	this.run = function(){
 		var me = this;
-		this._intervalId = setInterval(this.tick(me), 1000 / Game.fps);
+		this._intervalId = setInterval(this.tick(me), 1050 / Game.fps);
 	}
 	
 	this.drawEnemies = function(){
@@ -272,6 +284,7 @@ var Game = function(){
 		me.moveEnemies(me);
 		me.shootTowers(grid);
 		me.drawEnemies();
+		me.endGame();
 	}
 	
 	this.getThis = function(){
@@ -696,3 +709,6 @@ newGame.initEnemies(wave);
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
 //END GAME START FUNCTIONS
+var game = setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
+
+
