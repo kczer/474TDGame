@@ -341,13 +341,7 @@ h1{
 }
 
 
-#bottomBar{
-    float:left;
-    width:90%;
-    height:50px;
-    display:inline-block;
-    
-}
+
 #truckpath{
     position: relative;
     height:100px;
@@ -380,7 +374,7 @@ h1{
     position: relative;
     margin: 0 auto;
     width:70%;
-    height:90%;
+    height:70%;
     float:left;
     
     display:block;
@@ -388,8 +382,8 @@ h1{
 }
 #hqwrap{
     height:100%;
-    width:10%;
-    float:right;
+    width:20%;
+    float:left;
     
 }
 
@@ -401,6 +395,10 @@ h1{
     top:300px;
 }
 
-footer{
-    height:50px;
+#bottomBar{
+    float:left;
+    width:90%;
+    height:150px;
+    display:inline-block;
+    
 }
