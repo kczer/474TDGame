@@ -11,7 +11,11 @@ html{
 #topbar{
     z-index:5;
 }
-
+#life{
+    color:white;
+    text-align: left;
+    float:left;
+}
 #levelWaveDisplay p{
     margin:0;  
 }

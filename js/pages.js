@@ -178,10 +178,10 @@ var appStart = function(){
     document.getElementById("instruct").addEventListener('click',showInstruction);   
     // document.getElementById("nextInstruction").addEventListener('click',showMainMenu);   
     document.getElementById("insMainMenu").addEventListener('click',showMainMenu);
-    document.getElementById("pause").addEventListener('click',pauseGame);
-    document.getElementById("quit").addEventListener('click',showMainMenu);
-    document.getElementById("resume").addEventListener('click',resumeGame);
-    document.getElementById("pauseQuit").addEventListener('click',showMainMenu);
+    // document.getElementById("pause").addEventListener('click',pauseGame);
+    // document.getElementById("quit").addEventListener('click',showMainMenu);
+    // document.getElementById("resume").addEventListener('click',resumeGame);
+    // document.getElementById("pauseQuit").addEventListener('click',showMainMenu);
     
 };
 

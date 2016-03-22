@@ -12,7 +12,7 @@ var ticks = 0;
 var idnum = 0;
 var numticks = 0;
 var money = 300;
-var lives = 10;
+var lives = 3;
 var wave = 0;
 var deadenemies = 0;
 var towerticks = 0;
@@ -152,8 +152,9 @@ var checkDirection = function(enemy){
 		try{
 			return gameGrid.pathTiles[pos].nextDirection;
 		}catch(err){
-			console.log("enemy off board");
-			lives --;
+			console.log("enemy off board");''
+			lives --; //aye
+			newGame.displayLife();
 			 
 			var elem = document.getElementById(enemy.id);
 			if(elem !=null){
@@ -213,6 +214,11 @@ var Game = function(){
   		this.health -=1;
   		return this.health <= 0;
 	}
+	
+	this.displayLife  = function(){ //aye2
+  		$('#life').html("Lives: " + lives);
+	}
+
 
 
 	this.run = function(){
@@ -684,6 +690,7 @@ goldTower.on("click", turnCursorOn);
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
 var newGame = new Game();
+newGame.displayLife();
 newGame.displayCredits();
 newGame.initEnemies(wave);
 var me =newGame.getThis();
