@@ -312,10 +312,13 @@ var Game = function(){
   					if(distance<150&&this.enemies[i].direction!="delete"){
   						//this.enemies[enemy].health -= grid.towers[tower].damage;
   						this.enemies[i].health -=100;
+  						//blink
+  						var elem = document.getElementById(this.enemies[i].id);
+  						//-blink
   						this.setTowerGif(grid.towers[tower], this.enemies[i]);
   						if(this.enemies[i].health<= 0){
   							this.enemies[i].direction= "delete";
-							var elem = document.getElementById(this.enemies[i].id);
+							//var elem = document.getElementById(this.enemies[i].id);
 							if(elem !=null){
 								elem.parentNode.removeChild(elem);
 								deadenemies++;
