@@ -11,16 +11,16 @@ var previousTick=new Date().getTime();
 var ticks = 0;
 var idnum = 0;
 var numticks = 0;
-var money = 500;
+var money = 300;
 var lives = 10;
 var wave = 0;
 var deadenemies = 0;
 var towerticks = 0;
 
-var regTowerObj = new Tower("tower",10,10,15,100,10,10,10);
-var slowTowerObj = new Tower("slowTurret",5,15,7,75,10,10,10);
-var fastTowerObj = new Tower("fastTurret",15,7,10,125,10,10,10);
-var goldTowerObj = new Tower("goldTurret",20,20,10,200,10,10,10);
+var regTowerObj = new Tower("tower",10,25,15,100,10,10,10);
+var slowTowerObj = new Tower("slowTurret",10,50,7,200,10,10,10);
+var fastTowerObj = new Tower("fastTurret",10,100,10,400,10,10,10);
+var goldTowerObj = new Tower("goldTurret",10,500,10,2000,10,10,10);
 
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)"];
 //var levelOne = ["(4,0)","(4,1)","(3,1)","(2,1)","(1,1)","(1,2)","(1,3)","(2,3)","(3,3)","(4,3)","(4,4)","(4,5)","(5,5)","(6,5)","(7,5)","(7,6)","(7,7)","(6,7)","(5,7)","(4,7)","(4,8)","(4,9)","(3,9)","(2,9)","(1,9)","(1,10)","(1,11)","(2,11)","(3,11)","(4,11)","(5,11)","(6,11)","(6,10)","(7,10)","(8,10)","(9,10)","(9,11)","(9,12)","(9,13)","(8,13)","(8,14)"];//42 tiles
@@ -175,6 +175,10 @@ var Game = function(){
 
 	this.initEnemies = function(wave){
 		console.log("wave:"+wave);
+		if(wave>0){
+			money+=100;
+			newGame.displayCredits();
+		}
 		var numenemies = 5;
 		this.enemies = [];
 		var $div = document.getElementById("levelWaveDisplay");
@@ -298,6 +302,16 @@ var Game = function(){
   		}
 	}
 	
+	this.turnback = function(){
+		for(var i = 0; i<this.enemies.length;i++){
+			try{
+				document.getElementById(this.enemies[i].id).style.backgroundColor="transparent";
+			}catch(err){
+				
+			}
+		}
+	}
+	
 
 	this.shootTowers = function(grid){
 		towerticks++;
@@ -312,10 +326,12 @@ var Game = function(){
   					console.log("dis:"+distance);
   					if(distance<150&&this.enemies[i].direction!="delete"){
   						//this.enemies[enemy].health -= grid.towers[tower].damage;
-  						this.enemies[i].health -=100;
+  						this.enemies[i].health -=grid.towers[tower].damage;
   						//blink
   						var elem = document.getElementById(this.enemies[i].id);
-  						//-blink
+  						elem.style.backgroundColor= "red";
+  						var me = this;
+  						window.setTimeout(function() {me.turnback();} , 70);
   						this.setTowerGif(grid.towers[tower], this.enemies[i]);
   						if(this.enemies[i].health<= 0){
   							this.enemies[i].direction= "delete";
@@ -425,7 +441,7 @@ var Game = function(){
 				if(enemy.y<tower.y*TILE_H){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
 				}else{
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
 				}
 			}else if(degrees>77.5&&degrees<112.5){
 				if(enemy.y<tower.y*TILE_H){
@@ -437,7 +453,7 @@ var Game = function(){
 				if(enemy.y<tower.y*TILE_H){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
 				}else{
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
 				}
 			}else if(degrees>157.5&&degrees<202.5){
 				myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_5.png')";
