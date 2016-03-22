@@ -188,7 +188,7 @@ var Game = function(){
 			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
 			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
-			var en = {type : "", health: 100+(50*wave), speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
+			var en = {type : "", health: 100+(50*wave), speed : 2, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
 			idnum ++;
     		this.enemies.push(en);
     		
@@ -221,6 +221,8 @@ var Game = function(){
 
 	this.endGame = function(){
 		if (lives <= 0){
+        	clearInterval(game);
+        	$('#truck').addClass("hidden");
 			$('#end').css("height","150%");
 			$('#end').css("z-index","10");
 			$('#end').css("width","100%");
@@ -743,7 +745,6 @@ newGame.displayLife();
 newGame.displayCredits();
 newGame.initEnemies(wave);
 var me =newGame.getThis();
-setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
 //END GAME START FUNCTIONS
 var game = setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
 
