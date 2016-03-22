@@ -224,6 +224,7 @@ var Game = function(){
 					var newTowerDiv = document.createElement("div");
 					newTowerDiv.setAttribute("id",this.enemies[enemy].id);
 					newTowerDiv.setAttribute("class","mapzone"); 
+					newTowerDiv.style.position = "absolute";
 					newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
 					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
@@ -238,7 +239,7 @@ var Game = function(){
 					}
 					newTowerDiv.style.backgroundRepeat = "no-repeat";
 					newTowerDiv.style.backgroundPosition = "center";
-					document.body.appendChild(newTowerDiv);
+					document.getElementById('gridWrap').appendChild(newTowerDiv);
 				}else{
 					myElem.style.left= this.enemies[enemy].y+200;
 					myElem.style.top = this.enemies[enemy].x+200;
@@ -419,7 +420,7 @@ var Game = function(){
 			console.log("got here");
 			if(degrees>22.5&&degrees<77.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_4.png')";
 				}
@@ -427,11 +428,11 @@ var Game = function(){
 				if(enemy.y<tower.y*TILE_H){
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_7.png')";
 				}else{
-					myElem.style.backgroundImage = "url('/slowturret/60/sprite_3.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_3.png')";
 				}
 			}else if(degrees>112.5&&degrees<157.5){
 				if(enemy.y<tower.y*TILE_H){
-					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_8.png')";
+					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_6.png')";
 				}else{
 					myElem.style.backgroundImage = "url('/img/slowturret/60/sprite_2.png')";
 				}
@@ -499,6 +500,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
+		newTowerDiv.style.position = "absolute";
 		gameGrid.towers[clickedTile] = newTowerObj; 
 		console.log(gameGrid.towers[clickedTile]); //array of tower objects indexed at location on grid
 		gameGrid.grid[clickedTile].hasTower = true;
@@ -509,7 +511,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
-		document.body.appendChild(newTowerDiv);
+		document.getElementById("gridWrap").appendChild(newTowerDiv);
 		money -= newTowerObj.cost;
 		newGame.displayCredits();
 	}
@@ -528,6 +530,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerObj.id = newTowerDiv.getAttribute("id");
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+		newTowerDiv.style.position = "absolute";
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
 		gameGrid.towers[clickedTile] = newTowerObj; 
@@ -540,7 +543,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
-		document.body.appendChild(newTowerDiv);
+		document.getElementById("gridWrap").appendChild(newTowerDiv);
 		money -= newTowerObj.cost;
 		newGame.displayCredits();
 	}
@@ -557,6 +560,9 @@ var Grid = function(mapHeight,mapWidth) {
     // create the map zone
 	
     this.createGrid = function() {
+    var gridWrapper = document.createElement("div");
+    gridWrapper.setAttribute("id","gridWrap");
+    document.body.appendChild(gridWrapper);
 	for(var j = 0; j < mapHeight; j++)
 	{
 		for(var i = 0; i < mapWidth; i++)
@@ -567,9 +573,10 @@ var Grid = function(mapHeight,mapWidth) {
             var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
 			mapzone.setAttribute("id",pos);
 			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+			mapzone.style.position = "absolute";
 			mapzone.style.left = (TILE_H*i+200) + "px";
 			mapzone.style.top = (TILE_W*j+200) + "px";
-			document.body.appendChild(mapzone);
+			gridWrapper.appendChild(mapzone);
 			if(levelOne.indexOf(pos) > -1)
 			{
 				mapzone.style.backgroundImage = "url('/img/pathtile60.png')";
@@ -650,13 +657,13 @@ slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
 goldTower.on("click", turnCursorOn);
 
+
+//GAME START FUNCTIONS
 var gameGrid = new Grid(10,15);
 gameGrid.createGrid();
-//gameGrid.markTileDirections();
 var newGame = new Game();
 newGame.displayCredits();
 newGame.initEnemies(wave);
-//newGame.run();
-//fieldNameElement.innerHTML = "My new text!";
 var me =newGame.getThis();
 setInterval(function() { newGame.tick(me,gameGrid) }, 1000 / newGame.fps);
+//END GAME START FUNCTIONS
