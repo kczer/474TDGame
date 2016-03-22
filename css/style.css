@@ -246,7 +246,7 @@ h1{
 #game{
     position: relative;
     margin: 0 auto;
-    width:70%;
+    width:66%;
     height:60%;
     float:left;
     
@@ -265,7 +265,7 @@ h1{
     background-image: url("/img/HQ150.png");
     height:126px;
     width:150px;
-    top:300px;
+    top:8%;
 }
 
 #towerbar{
