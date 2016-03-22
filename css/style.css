@@ -220,12 +220,15 @@ h1{
 
 
 .truckpath{
+    animation: truck 5s;
+    animation-fill-mode: forwards;
+}
+.truckpathAlways{
     position: relative;
     height:100px;
     width:8%;
     float:left;
-    animation: truck 5s;
-    animation-fill-mode: forwards;
+ 
 }
 #truck{
     float:right;
