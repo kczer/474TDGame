@@ -232,6 +232,17 @@ var Game = function(){
 			$('#end').slideDown();
 		}
 	}
+	this.winGame = function(){
+        	clearInterval(game);
+        	$('#truck').addClass("hidden");
+			$('#end').css("height","150%");
+			$('#end').css("z-index","10");
+			$('#end').css("width","100%");
+			$('#end').css("background-color","black");
+			$('#end').css("color","white");
+			$('#end').html("<h1>you're da best mane, you deed it.</h1>");
+			$('#end').slideDown();
+	}
 	
 
 
@@ -294,6 +305,8 @@ var Game = function(){
 	}
 
 	this.moveEnemies = function(me){
+		if(this.wave <= 15)
+		{
 		numticks++;
 		if (numticks>(this.enemies.length-1)*100) numticks =(this.enemies.length-1)*100;
 		for (var i= 0; i< 1+Math.floor(numticks/100); i++){
@@ -323,6 +336,10 @@ var Game = function(){
   			//this.enemies[enemy].move(this.passedTime);
   			//stuff
   		}
+		}
+		else{
+			me.winGame();
+		}
 	}
 	
 	this.turnback = function(){
