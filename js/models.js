@@ -305,7 +305,8 @@ var Game = function(){
 	this.turnback = function(){
 		for(var i = 0; i<this.enemies.length;i++){
 			try{
-				document.getElementById(this.enemies[i].id).style.backgroundColor="transparent";
+				//document.getElementById(this.enemies[i].id).style.backgroundColor="transparent";
+				document.getElementById(this.enemies[i].id).style.opacity="1";
 			}catch(err){
 				
 			}
@@ -329,9 +330,10 @@ var Game = function(){
   						this.enemies[i].health -=grid.towers[tower].damage;
   						//blink
   						var elem = document.getElementById(this.enemies[i].id);
-  						elem.style.backgroundColor= "red";
+  						//elem.style.backgroundColor= "rgba(255,0,0,0.2)";
+  						elem.style.opacity=".3";
   						var me = this;
-  						window.setTimeout(function() {me.turnback();} , 70);
+  						window.setTimeout(function() {me.turnback();} , 200);
   						this.setTowerGif(grid.towers[tower], this.enemies[i]);
   						if(this.enemies[i].health<= 0){
   							this.enemies[i].direction= "delete";
