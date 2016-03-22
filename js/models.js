@@ -311,6 +311,7 @@ var Game = function(){
   				if (deadenemies==this.enemies.length){
   					this.wave ++;
   					me.initEnemies(this.wave);
+  					refireAnim();
   					numticks = 0;
   					deadenemies = 0;
   					break;
@@ -731,6 +732,20 @@ for(var j = 0; j < gameGrid.mapHeight; j++)
 		  }
 	  }	
 }
+
+var refireAnim = function() {
+var truck = document.getElementById("truckpath");
+  truck.classList.remove("truckpath");
+  truck.classList.add("hiddenTruck");
+  setTimeout(function() {
+  	
+console.log("In refire: " + truck.classList);
+    truck.classList.remove("hiddenTruck");
+    truck.classList.add("truckpath");
+console.log("In refire: " + truck.classList);
+  }, 0);
+}
+
 regularTower.on("click", turnCursorOn);
 slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);

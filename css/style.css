@@ -219,7 +219,7 @@ h1{
 
 
 
-#truckpath{
+.truckpath{
     position: relative;
     height:100px;
     width:8%;

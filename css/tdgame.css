@@ -1,7 +1,13 @@
 /**{*/
 /*    border:dotted 1px white;*/
 /*}*/
-
+.hiddenTruck{
+    position: relative;
+    height:100px;
+    width:8%;
+    float:left;
+    display:none;
+}
 .hidden {
     display: none;
 }
