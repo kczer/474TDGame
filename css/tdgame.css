@@ -27,9 +27,9 @@
 }
 */
 #gridWrap{
-    position:relative;
-    bottom:1500px;
-    left:100px;
+    position:absolute;
+    top: -50%;
+    left:0;
 }
 .tower.cursor_change {
     cursor: url('/img/turret/sprite_1.png'), crosshair;

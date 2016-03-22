@@ -560,9 +560,10 @@ var Grid = function(mapHeight,mapWidth) {
     // create the map zone
 	
     this.createGrid = function() {
-    var gridWrapper = document.createElement("div");
-    gridWrapper.setAttribute("id","gridWrap");
-    document.body.appendChild(gridWrapper);
+    //var gridWrapper = document.createElement("div");
+    var gridWrapper = document.getElementById("gridWrap");
+    //gridWrapper.setAttribute("id","gridWrap");
+    //document.body.appendChild(gridWrapper);
 	for(var j = 0; j < mapHeight; j++)
 	{
 		for(var i = 0; i < mapWidth; i++)
