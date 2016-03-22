@@ -188,7 +188,7 @@ var Game = function(){
 			var starttilex= parseInt(levelOne[0].substr(1,2))*TILE_H;//-TILE_H*.5;
 			var starttiley= parseInt(levelOne[0].substr(3,4))*TILE_W;
 			//var en = new Enemy("", 100, 100, 1, "RIGHT", starttiley,starttilex);
-			var en = {type : "", health: 100+(25*wave), speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
+			var en = {type : "", health: 100+(50*wave), speed : 1, direction : "RIGHT", x : starttilex, y : starttiley, id:("enemy"+idnum), starttime:5};
 			idnum ++;
     		this.enemies.push(en);
     		
@@ -579,7 +579,7 @@ var towerPlaceLogic = function(){
 		gameGrid.grid[clickedTile].towerType = clickedTower;
 		console.log(gameGrid.grid[clickedTile]); //updated grid tile to reflect having tower 
 		turnCursorOff();
-		newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/30/30')";
+		newTowerDiv.style.backgroundImage =  whichTowerBgImg(clickedTower);
 		newTowerDiv.style.backgroundRepeat = "no-repeat";
 		newTowerDiv.style.backgroundPosition = "center";
 		newTowerDiv.addEventListener("click",towerPlaceLogic);
@@ -592,8 +592,8 @@ var towerPlaceLogic = function(){
 
 
 var Grid = function(mapHeight,mapWidth) {
-    var mapHeight = mapHeight;
-    var mapWidth = mapWidth;
+    this.mapHeight = mapHeight;
+    this.mapWidth = mapWidth;
     this.grid = {};
     this.towers = {};
     this.pathTiles = {};
@@ -671,6 +671,10 @@ var turnCursorOn = function(e){
 	regularTower.off("click", turnCursorOn);
 	$("body").on("click", turnCursorOff);
     towerChosen = true;
+    console.log("turn cursor on");
+    console.log(gameGrid.mapHeight);
+    console.log(gameGrid.mapWidth);
+	turnHoverOn();	
     e.stopImmediatePropagation();
 	//
 	
@@ -690,9 +694,41 @@ var turnCursorOff = function(){
     	$("body").off("click", turnCursorOff);
     	regularTower.on("click", turnCursorOn);
     	towerChosen = false;
+    	turnHoverOff();
     }
 }
 
+var turnHoverOn = function(){
+for(var j = 0; j < gameGrid.mapHeight; j++)
+	  {
+	   	for(var i = 0; i < gameGrid.mapWidth; i++)
+		  {
+		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+		   if(!gameGrid.pathTiles[pos]){
+		    $(document.getElementById(pos)).hover(function() {
+			    $(this).css("opacity", 0.8);
+			}, function() {
+    			$(this).css("opacity", 1.0);
+			});
+		  }
+	  }	
+}
+}
+var turnHoverOff = function(){
+for(var j = 0; j < gameGrid.mapHeight; j++)
+	  {
+	   	for(var i = 0; i < gameGrid.mapWidth; i++)
+		  {
+		    var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
+		   
+		    $(document.getElementById(pos)).hover(function() {
+			    $(this).css("opacity", 1.0);
+			}, function() {
+    			$(this).css("opacity", 1.0);
+			});
+		  }
+	  }	
+}
 regularTower.on("click", turnCursorOn);
 slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
