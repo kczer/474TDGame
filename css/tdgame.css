@@ -22,8 +22,15 @@
     cursor: url('http://www.placecage.com/50/50'), crosshair;
 }
 
-
-
+/*#\(0\,0\):hover{
+    opacity:0.8;
+}
+*/
+#gridWrap{
+    position:absolute;
+    top: -50%;
+    left:0;
+}
 .tower.cursor_change {
     cursor: url('/img/turret/sprite_1.png'), crosshair;
 }
