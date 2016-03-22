@@ -224,6 +224,7 @@ var Game = function(){
 					var newTowerDiv = document.createElement("div");
 					newTowerDiv.setAttribute("id",this.enemies[enemy].id);
 					newTowerDiv.setAttribute("class","mapzone"); 
+					newTowerDiv.style.position = "absolute";
 					newTowerDiv.style.left = this.enemies[enemy].y+200 + "px";
 					newTowerDiv.style.top = this.enemies[enemy].x+200 + "px";
 					//newTowerDiv.style.backgroundImage = "url('http://www.placecage.com/40/40')";
@@ -499,6 +500,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
+		newTowerDiv.style.position = "absolute";
 		gameGrid.towers[clickedTile] = newTowerObj; 
 		console.log(gameGrid.towers[clickedTile]); //array of tower objects indexed at location on grid
 		gameGrid.grid[clickedTile].hasTower = true;
@@ -528,6 +530,7 @@ var towerPlaceLogic = function(){
 		newTowerDiv.setAttribute("id",(clickedTile + "_T"));
 		newTowerObj.id = newTowerDiv.getAttribute("id");
 		newTowerDiv.setAttribute("class","mapzone"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+		newTowerDiv.style.position = "absolute";
 		newTowerDiv.style.left = (TILE_H*(gameGrid.grid[clickedTile].locationY)+200) + "px";
 		newTowerDiv.style.top = (TILE_W*(gameGrid.grid[clickedTile].locationX)+200) + "px";
 		gameGrid.towers[clickedTile] = newTowerObj; 
@@ -570,6 +573,7 @@ var Grid = function(mapHeight,mapWidth) {
             var pos = "(" + j + "," + i + ")"; //gives us our position for these cells as a coordinate
 			mapzone.setAttribute("id",pos);
 			mapzone.setAttribute("class","mapzone hidden"); //remove hidden here and run if you want to see the prelim. map idea (not going to use the strange level format seen below however)
+			mapzone.style.position = "absolute";
 			mapzone.style.left = (TILE_H*i+200) + "px";
 			mapzone.style.top = (TILE_W*j+200) + "px";
 			gridWrapper.appendChild(mapzone);

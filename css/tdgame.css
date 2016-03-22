@@ -26,7 +26,11 @@
     opacity:0.8;
 }
 */
-
+#gridWrap{
+    position:relative;
+    bottom:1500px;
+    left:100px;
+}
 .tower.cursor_change {
     cursor: url('/img/turret/sprite_1.png'), crosshair;
 }
