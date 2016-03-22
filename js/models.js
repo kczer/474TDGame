@@ -747,10 +747,30 @@ console.log("In refire: " + truck.classList);
   }, 100);
 }
 
+var createBasicTooltip = function(toolbarTower){
+if(toolbarTower == regularTower){
+regularTower.attr('title', (regularTower.attr('id')+'\n'+"Cost: "+(regTowerObj.cost) +"\nRate of fire: "+(regTowerObj.fireRate)+"\nDamage: "+(regTowerObj.damage)+"\nRange: "+(regTowerObj.range)));
+}
+else if(toolbarTower == slowTower){
+slowTower.attr('title', (slowTower.attr('id')+'\n'+"Cost: "+(slowTowerObj.cost) +"\nRate of fire: "+(slowTowerObj.fireRate)+"\nDamage: "+(slowTowerObj.damage)+"\nRange: "+(slowTowerObj.range)));
+}
+else if(toolbarTower == fastTower){
+fastTower.attr('title', (fastTower.attr('id')+'\n'+"Cost: "+(fastTowerObj.cost) +"\nRate of fire: "+(fastTowerObj.fireRate)+"\nDamage: "+(fastTowerObj.damage)+"\nRange: "+(fastTowerObj.range)));
+}
+else if(toolbarTower == goldTower){
+goldTower.attr('title', (goldTower.attr('id')+'\n'+"Cost: "+(goldTowerObj.cost) +"\nRate of fire: "+(goldTowerObj.fireRate)+"\nDamage: "+(goldTowerObj.damage)+"\nRange: "+(goldTowerObj.range)));
+}
+}
+
 regularTower.on("click", turnCursorOn);
 slowTower.on("click", turnCursorOn);
 fastTower.on("click", turnCursorOn);
 goldTower.on("click", turnCursorOn);
+
+createBasicTooltip(regularTower);
+createBasicTooltip(slowTower);
+createBasicTooltip(fastTower);
+createBasicTooltip(goldTower);
 
 
 //GAME START FUNCTIONS
